@@ -1,32 +1,16 @@
-import React, { useState } from "react";
+import React from 'react'
+import styled from 'styled-components'
 
-import "./NavBar.css";
-import { Link, NavLink } from "react-router-dom";
-
-export const Navbar = () => {
-  const [menuOpen, setMenuOpen] = useState(false);
-
+function NavBar() {
   return (
-    <nav>
-      <Link to="/" className="title">
-        Website
-      </Link>
-      <div className="menu" onClick={() => setMenuOpen(!menuOpen)}>
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-      <ul className={menuOpen ? "open" : ""}>
-        <li>
-          <NavLink to="/about">About</NavLink>
-        </li>
-        <li>
-          <NavLink to="/services">Services</NavLink>
-        </li>
-        <li>
-          <NavLink to="/contact">Contact</NavLink>
-        </li>
-      </ul>
-    </nav>
-  );
-};
+    <>
+    <NavContainer>
+      <h2>hello</h2>
+    </NavContainer>
+    </>
+  )
+}
+
+export default NavBar
+
+const NavContainer = styled.nav
