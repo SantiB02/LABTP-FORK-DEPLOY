@@ -1,117 +1,138 @@
-import React, { useState } from 'react'
-import styled from 'styled-components'
-import BurguerButton from './BurguerButton'
+import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
+import BurguerButton from './BurguerButton';
 
 function Navbar() {
+  const [clicked, setClicked] = useState(false);
+  const [showShadow, setShowShadow] = useState(false);
 
-  const [clicked, setClicked] = useState(false)
   const handleClick = () => {
-    //cuando esta true lo pasa a false y vice versa
-    setClicked(!clicked)
-  }
+    setClicked(!clicked);
+  };
+
+  // Agregar o quitar sombra cuando se desplaza la página
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      if (scrollY > 0) {
+        setShowShadow(true);
+      } else {
+        setShowShadow(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  // Manejar el clic en los enlaces
+  const handleLinkClick = () => {
+    // Cerrar el menú si está abierto
+    if (clicked) {
+      setClicked(false);
+    }
+  };
+
   return (
     <>
-      <NavContainer>
+      <NavContainer showShadow={showShadow} clicked={clicked}>
         <h2>Navbar <span>Responsive</span></h2>
         <div className={`links ${clicked ? 'active' : ''}`}>
-          <a onClick={handleClick} href="#h">Home</a>
-          <a onClick={handleClick} href="#h">Shop</a>
-          <a onClick={handleClick} href="#h">About</a>
-          <a onClick={handleClick} href="#h">Contact</a>
-          <a onClick={handleClick} href="#h">Blog</a>
+          <a onClick={handleLinkClick} href="#home">Home</a>
+          <a onClick={handleLinkClick} href="#shop">Shop</a>
+          <a onClick={handleLinkClick} href="#about">About</a>
+          <a onClick={handleLinkClick} href="#contact">Contact</a>
+          <a onClick={handleLinkClick} href="#blog">Blog</a>
         </div>
         <div className='burguer'>
           <BurguerButton clicked={clicked} handleClick={handleClick} />
         </div>
-        <BgDiv className={`initial ${clicked ? ' active' : ''}`}></BgDiv>
       </NavContainer>
+      <BgDiv className={`initial${clicked ? ' active' : ''}`}></BgDiv>
     </>
-  )
+  );
 }
 
-export default Navbar
+export default Navbar;
 
 const NavContainer = styled.nav`
-  h2{
-    color: white;
+  h2 {
+    color: black;
     font-weight: 400;
-    span{
+    span {
       font-weight: bold;
     }
   }
-  padding: .4rem;
-  background-color: #333;
+  padding: 0.4rem;
+  background-color: #FFF9FB;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  a{
-    color: white;
+  a {
+    color: black;
     text-decoration: none;
     margin-right: 1rem;
   }
-  .links{
+  .links {
     position: absolute;
-    top: -700px;
-    left: -2000px;
-    right: 0;
-    margin-left: auto;
-    margin-right: auto;
+    top: 0;
+    left: -100%; /* Cambiar la posición inicial a -100% para ocultar el menú */
+    width: 80%; /* Ajustar el ancho del menú según tus preferencias */
+    height: 100%;
+    background-color: #FFF9FB;
     text-align: center;
-    transition: all .5s ease;
-    a{
-      color: white;
+    transition: all 0.5s ease;
+    z-index: 1;
+    a {
+      color: black;
       font-size: 2rem;
       display: block;
+      padding: 1rem;
+      box-shadow: ${props => (props.showShadow && !props.clicked) ? '0 2px 4px rgba(0, 0, 0, 0.2)' : 'none'}; /* Aplicar sombra solo cuando el menú está cerrado en pantallas grandes */
     }
-    @media(min-width: 768px){
+    @media (min-width: 768px) {
       position: initial;
       margin: 0;
-      a{
+      a {
         font-size: 1rem;
-        color: white;
+        color: black;
         display: inline;
+        box-shadow: none; /* Eliminar la sombra en pantallas grandes */
       }
       display: block;
+      width: auto; /* Ajustar el ancho para pantallas más grandes */
+      left: 0; /* Mostrar el menú completamente en pantallas más grandes */
+      opacity: 1; /* Asegurar que el menú esté visible */
     }
   }
-  .links.active{
-    width: 100%;
-    display: block;
-    position: absolute;
-    margin-left: auto;
-    margin-right: auto;
-    top: 30%;
-    left: 0;
-    right: 0;
-    text-align: center;
-    a{
-      font-size: 2rem;
-      margin-top: 1rem;
-      color: white;
-    }
+  .links.active {
+    left: 0; /* Mostrar el menú deslizándolo a la posición 0 en pantallas pequeñas */
+    box-shadow: ${props => (props.clicked) ? '0 2px 4px rgba(0, 0, 0, 0.2)' : 'none'}; /* Agregar sombra cuando el menú está abierto en pantallas pequeñas */
   }
-  .burguer{
-    @media(min-width: 768px){
+  .burguer {
+    @media (min-width: 768px) {
       display: none;
     }
   }
-`
+  /* Agregar una sombra de caja debajo del navbar si showShadow es true */
+  box-shadow: ${props => (props.showShadow && !props.clicked) ? '0 2px 4px rgba(0, 0, 0, 0.2)' : 'none'}; /* Aplicar sombra solo cuando el menú está cerrado en pantallas grandes */
+`;
 
 const BgDiv = styled.div`
-  background-color: #222;
+  background-color: #FFF9FB;
   position: absolute;
-  top: -1000px;
-  left: -1000px;
-  width: 100%;
+  top: 0;
+  left: 0;
+  width: 0; /* Cambia el ancho a 0 para ocultar inicialmente el menú */
   height: 100%;
   z-index: -1;
-  transition: all .6s ease ;
-  
-  &.active{
-    border-radius: 0 0 80% 0;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+  border: 2px solid gray; /* Cambia el color a gris y aplica un borde a todos los lados */
+  transition: none; /* Elimina la transición */
+
+  &.active {
+    width: 100%; /* Ancho al 100% cuando está activo */
   }
 `
