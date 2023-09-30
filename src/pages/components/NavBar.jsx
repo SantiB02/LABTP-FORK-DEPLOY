@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import BurguerButton from './BurguerButton';
 
-function Navbar() {
+export const NavBar = () => {
   const [clicked, setClicked] = useState(false);
   const [showShadow, setShowShadow] = useState(false);
 
@@ -56,7 +56,6 @@ function Navbar() {
   );
 }
 
-export default Navbar;
 
 const NavContainer = styled.nav`
   h2 {
