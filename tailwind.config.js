@@ -4,6 +4,9 @@ module.exports = {
   mode: "jit",
   theme: {
     extend: {
+      gridTemplateColumns: {
+        16: "repeat(10, minmax(0, 1fr))",
+      },
       colors: {
         primary: "#050816",
         secondary: "#aaa6c3",
@@ -22,7 +25,7 @@ module.exports = {
         xs: "450px",
       },
       backgroundColor: {
-        "background-cream": "#FFF9FB')",
+        "background-cream": "#FF550A",
       },
     },
   },

@@ -1,13 +1,29 @@
 import { useUserContext, useUserToggleContext } from "../contexts/userContext";
+import { useState } from "react";
+import { ProductList } from "./components/ProductList";
+import { Login } from "./components/Login";
 
-export const Home = () => {
+import React from "react";
+import { Header } from "./components/Header";
+import { Cart } from "./components/Cart";
+
+export const Home = ({ products, changeFilters }) => {
   const user = useUserContext();
-  console.log(user);
   const handleLogin = useUserToggleContext();
+
   return (
     <>
-      <button onClick={handleLogin}>Hola</button>
-      <h1>{user && <p>Hola {user.name}</p>}</h1>;
+      <div className="flex bg-secondary w-screen justify-between">
+        <h1>{user && <p>Hola {user.name}</p>}</h1>
+        <button onClick={handleLogin}>Login</button>
+      </div>
+      <div className="flex flex-row bg-blue-300">
+        <div clasName="flex flex-col">
+          <Header />
+          <ProductList products={products} />
+        </div>
+        <Cart />
+      </div>
     </>
   );
 };

@@ -12,7 +12,7 @@ export function useUserToggleContext() {
 }
 
 export function UserProvider({ children }) {
-  const [user, setUser] = useState("null");
+  const [user, setUser] = useState(null);
 
   const changeLogin = () => {
     if (user) {

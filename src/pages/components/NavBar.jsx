@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import BurguerButton from './BurguerButton';
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
+import BurguerButton from "./BurguerButton";
 
 export const NavBar = () => {
   const [clicked, setClicked] = useState(false);
@@ -21,10 +21,10 @@ export const NavBar = () => {
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
@@ -39,23 +39,34 @@ export const NavBar = () => {
   return (
     <>
       <NavContainer showShadow={showShadow} clicked={clicked}>
-        <h2>Navbar <span>Responsive</span></h2>
-        <div className={`links ${clicked ? 'active' : ''}`}>
-          <a onClick={handleLinkClick} href="#home">Home</a>
-          <a onClick={handleLinkClick} href="#shop">Shop</a>
-          <a onClick={handleLinkClick} href="#about">About</a>
-          <a onClick={handleLinkClick} href="#contact">Contact</a>
-          <a onClick={handleLinkClick} href="#blog">Blog</a>
+        <h2>
+          Lorem <span>Lingerie</span>
+        </h2>
+        <div className={`links ${clicked ? "active" : ""}`}>
+          <a onClick={handleLinkClick} href="#home">
+            Home
+          </a>
+          <a onClick={handleLinkClick} href="#shop">
+            Shop
+          </a>
+          <a onClick={handleLinkClick} href="#about">
+            About
+          </a>
+          <a onClick={handleLinkClick} href="#contact">
+            Contact
+          </a>
+          <a onClick={handleLinkClick} href="#blog">
+            Blog
+          </a>
         </div>
-        <div className='burguer'>
+        <div className="burguer">
           <BurguerButton clicked={clicked} handleClick={handleClick} />
         </div>
       </NavContainer>
-      <BgDiv className={`initial${clicked ? ' active' : ''}`}></BgDiv>
+      <BgDiv className={`initial${clicked ? " active" : ""}`}></BgDiv>
     </>
   );
-}
-
+};
 
 const NavContainer = styled.nav`
   h2 {
@@ -66,7 +77,7 @@ const NavContainer = styled.nav`
     }
   }
   padding: 0.4rem;
-  background-color: #FFF9FB;
+  background-color: #fff9fb;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -81,16 +92,19 @@ const NavContainer = styled.nav`
     left: -100%; /* Cambiar la posición inicial a -100% para ocultar el menú */
     width: 80%; /* Ajustar el ancho del menú según tus preferencias */
     height: 100%;
-    background-color: #FFF9FB;
+    background-color: #fff9fb;
     text-align: center;
     transition: all 0.5s ease;
-    z-index: 1;
+    z-index: 0;
     a {
       color: black;
       font-size: 2rem;
       display: block;
       padding: 1rem;
-      box-shadow: ${props => (props.showShadow && !props.clicked) ? '0 2px 4px rgba(0, 0, 0, 0.2)' : 'none'}; /* Aplicar sombra solo cuando el menú está cerrado en pantallas grandes */
+      box-shadow: ${(props) =>
+        props.showShadow && !props.clicked
+          ? "0 2px 4px rgba(0, 0, 0, 0.2)"
+          : "none"}; /* Aplicar sombra solo cuando el menú está cerrado en pantallas grandes */
     }
     @media (min-width: 768px) {
       position: initial;
@@ -109,7 +123,10 @@ const NavContainer = styled.nav`
   }
   .links.active {
     left: 0; /* Mostrar el menú deslizándolo a la posición 0 en pantallas pequeñas */
-    box-shadow: ${props => (props.clicked) ? '0 2px 4px rgba(0, 0, 0, 0.2)' : 'none'}; /* Agregar sombra cuando el menú está abierto en pantallas pequeñas */
+    box-shadow: ${(props) =>
+      props.clicked
+        ? "0 2px 4px rgba(0, 0, 0, 0.2)"
+        : "none"}; /* Agregar sombra cuando el menú está abierto en pantallas pequeñas */
   }
   .burguer {
     @media (min-width: 768px) {
@@ -117,11 +134,14 @@ const NavContainer = styled.nav`
     }
   }
   /* Agregar una sombra de caja debajo del navbar si showShadow es true */
-  box-shadow: ${props => (props.showShadow && !props.clicked) ? '0 2px 4px rgba(0, 0, 0, 0.2)' : 'none'}; /* Aplicar sombra solo cuando el menú está cerrado en pantallas grandes */
+  box-shadow: ${(props) =>
+    props.showShadow && !props.clicked
+      ? "0 2px 4px rgba(0, 0, 0, 0.2)"
+      : "none"}; /* Aplicar sombra solo cuando el menú está cerrado en pantallas grandes */
 `;
 
 const BgDiv = styled.div`
-  background-color: #FFF9FB;
+  background-color: #fff9fb;
   position: absolute;
   top: 0;
   left: 0;
@@ -134,4 +154,4 @@ const BgDiv = styled.div`
   &.active {
     width: 100%; /* Ancho al 100% cuando está activo */
   }
-`
+`;
