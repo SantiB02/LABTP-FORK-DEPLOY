@@ -3,6 +3,7 @@ import "./App.css";
 import { NavBar } from "./pages/components/NavBar";
 import { Home } from "./pages/Home";
 import { Contact } from "./pages/Contact";
+import { Register } from "./pages/Register";
 import { UserProvider } from "./contexts/userContext";
 import { Login } from "./pages/components/Login";
 import ProductListJson from "./mocks/products.json";
