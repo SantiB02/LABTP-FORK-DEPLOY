@@ -26,6 +26,7 @@ function App() {
       <div className="bg-background-cream">
         <UserProvider>
           <Login />
+          <Register />
           <NavBar />
           <CartProvider>
             <Home products={filteredProducts} />

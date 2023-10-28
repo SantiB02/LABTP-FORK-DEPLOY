@@ -1,6 +1,33 @@
-import React from "react";
-import Form from "./components/Form";
+import React, { useState } from "react";
+import RegisterForm from "./components/RegisterForm";
+import {
+  ModalWrapper,
+  ModalContent,
+} from "./components/styledComponents/Modals";
 
 export const Register = () => {
-  return <Form />;
+  const [isPopUpActive, setIsPopUpActive] = useState(false);
+
+  const handleRegister = () => {
+    setIsPopUpActive(true);
+  };
+
+  const PopUpActiveHandler = (value) => {
+    setIsPopUpActive(value);
+  };
+
+  return (
+    <>
+      <div>
+        <button onClick={handleRegister}>Registrarse</button>
+      </div>
+      {isPopUpActive ? (
+        <ModalWrapper>
+          <ModalContent>
+            <RegisterForm setIsPopUpActive={PopUpActiveHandler} />
+          </ModalContent>
+        </ModalWrapper>
+      ) : null}
+    </>
+  );
 };
