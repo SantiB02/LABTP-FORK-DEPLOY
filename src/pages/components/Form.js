@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 
 const Form = () => {
-  const [username, setUsername] = useState("");
+  const [userName, setUsername] = useState("");
   const [userLastname, setUserLastname] = useState("");
   const [userEmail, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
 
-  const usernameHandler = (event) => {
+  const userNameHandler = (event) => {
     setUsername(event.target.value);
-    console.log(username);
   };
   const userLastnameHandler = (event) => {
     setUserLastname(event.target.value);
@@ -25,7 +24,7 @@ const Form = () => {
       <h1>Registrate</h1>
       <p>o Iniciar Sesión</p>
       <label>Nombre:</label>
-      <input type="text" value={username} onChange={usernameHandler} />
+      <input type="text" value={userName} onChange={userNameHandler} />
       <label>Apellido:</label>
       <input type="text" value={userLastname} onChange={userLastnameHandler} />
       <label>Email:</label>

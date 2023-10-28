@@ -1,0 +1,25 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "firstName": "Juan",
+      "lastName": "Sanchez",
+      "email": "juanS@hotmail.com",
+      "password": "juancito22"
+    },
+    {
+      "id": 2,
+      "firstName": "Ana",
+      "lastName": "García",
+      "email": "ana34@gmail.com",
+      "password": "ana78"
+    },
+    {
+      "id": 3,
+      "firstName": "Santiago",
+      "lastName": "Olmos",
+      "email": "santiOlmos@gmail.com",
+      "password": "olmosSanti02"
+    }
+  ]
+}
