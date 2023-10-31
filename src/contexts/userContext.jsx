@@ -22,6 +22,7 @@ export function UserProvider({ children }) {
       loggedUserRole = registeredUsers[foundUserIndex].role; //guardo el rol del usuario que se está logueando
       alert("Inicio de sesión exitoso. El usuario está registrado");
     } else {
+      loggedUserRole = ""; //limpio el rol del usuario logueado
       alert(
         "El usuario ingresado no está registrado o los datos ingresados son incorrectos"
       ); //los alerts son para TESTEO. Habría que buscar opciones más cosméticas jeje
