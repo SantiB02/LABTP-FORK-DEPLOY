@@ -1,13 +1,16 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { ModalWrapper, ModalContent } from "./styledComponents/Modals";
+import { userContext } from "../../contexts/UserContext";
 
 export const Login = ({}) => {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isPopUpActive, setIsPopUpActive] = useState(false);
 
-  const handleUsernameChange = (e) => {
-    setUsername(e.target.value);
+  const { user, handleUserLogin, closeSession } = useContext(userContext);
+
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
   };
 
   const handlePasswordChange = (e) => {
@@ -23,10 +26,27 @@ export const Login = ({}) => {
     setIsPopUpActive(true);
   };
 
+  const handleAddUser = () => {
+    setEmail(""); //Limpio los dos inputs luego de iniciar sesión
+    setPassword("");
+    const loginUser = { email, password };
+    handleUserLogin(loginUser);
+  };
+
+  const handleCloseSession = () => {
+    closeSession();
+  };
+
   return (
     <>
       <div>
-        <button onClick={handleLogin}>Iniciar Sesión</button>
+        <button
+          onClick={
+            Object.keys(user).length > 0 ? handleCloseSession : handleLogin
+          }
+        >
+          {Object.keys(user).length > 0 ? "Cerrar Sesión" : "Iniciar Sesión"}
+        </button>
       </div>
       {isPopUpActive ? (
         <ModalWrapper>
@@ -34,12 +54,12 @@ export const Login = ({}) => {
             <h2>Iniciar Sesión</h2>
             <form onSubmit={handleSubmit}>
               <div>
-                <label htmlFor="username">Nombre de Usuario:</label>
+                <label htmlFor="email">Email:</label>
                 <input
-                  type="text"
-                  id="username"
-                  value={username}
-                  onChange={handleUsernameChange}
+                  type="email"
+                  id="email"
+                  value={email}
+                  onChange={handleEmailChange}
                 />
               </div>
               <div>
@@ -54,6 +74,7 @@ export const Login = ({}) => {
               <button
                 className="btn bg-secondary rounded-[10px] "
                 type="submit"
+                onClick={handleAddUser}
               >
                 Iniciar Sesión
               </button>

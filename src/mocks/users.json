@@ -23,6 +23,14 @@
       "email": "santiOlmos@gmail.com",
       "password": "olmosSanti02",
       "role": "client"
+    },
+    {
+      "id": 4,
+      "firstName": "Santiago",
+      "lastName": "Brasca",
+      "email": "santibrasca02@gmail.com",
+      "password": "santi",
+      "role": "client"
     }
   ]
 }
