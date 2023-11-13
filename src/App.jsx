@@ -4,7 +4,6 @@ import { NavBar } from "./pages/components/NavBar";
 import { Home } from "./pages/Home";
 import { Contact } from "./pages/Contact";
 import { Register } from "./pages/Register";
-import { UserProvider } from "./contexts/UserContext";
 import { Login } from "./pages/components/Login";
 import ProductListJson from "./mocks/products.json";
 import { Footer } from "./pages/components/Footer";
@@ -12,6 +11,7 @@ import { Footer } from "./pages/components/Footer";
 //import { useContext } from "react";
 import { useFilters } from "./hooks/useFilters";
 import { CartProvider } from "./contexts/CartContext";
+import { UserProvider } from "./contexts/userContext";
 
 //export const userContext = React.createContext(); te olvidaste esta línea (?)
 

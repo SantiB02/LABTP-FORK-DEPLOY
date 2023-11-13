@@ -8,7 +8,7 @@ const registeredUsers = RegisteredUsersJson.users;
 
 export function UserProvider({ children }) {
   const [user, setUser] = useState({});
-  const loggedUserRole = ""; //creo una variable para almacenar el rol del usuario logueado y la paso por el Provider. Va a servir para renderizar cosas dependiendo del rol que tenga el usuario logueado.
+  let loggedUserRole = ""; //creo una variable para almacenar el rol del usuario logueado y la paso por el Provider. Va a servir para renderizar cosas dependiendo del rol que tenga el usuario logueado.
 
   const handleUserLogin = (user) => {
     const foundUserIndex = registeredUsers.findIndex(
