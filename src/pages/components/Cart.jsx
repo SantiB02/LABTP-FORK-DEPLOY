@@ -12,7 +12,14 @@ export const Cart = () => {
     setIsCartOpen(!isCartOpen);
   };
 
-  const CartItem = ({ thumbnail, price, title, quantity, addToCart }) => {
+  const CartItem = ({
+    thumbnail,
+    price,
+    title,
+    quantity,
+    addToCart,
+    removeFromCart,
+  }) => {
     return (
       <li className="border-b-2">
         <img className="aspect-auto w-screen" src={thumbnail} alt={title} />
@@ -25,8 +32,7 @@ export const Cart = () => {
             +
           </button>
           <button className="p-3" onClick={removeFromCart}>
-            {" "}
-            esto que mierda hace{" "}
+            Quitar de la lista
           </button>
         </footer>
       </li>
@@ -60,6 +66,7 @@ export const Cart = () => {
                 key={product.id}
                 {...product}
                 addToCart={() => addToCart(product)}
+                removeFromCart={() => removeFromCart(product)}
               />
             );
           })}

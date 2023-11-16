@@ -29,7 +29,7 @@ export const Filters = () => {
           type="range"
           id={minPriceFilterId}
           min="1000"
-          max="50000"
+          max="15000"
           onChange={handleChangeMinPrice}
           value={filters.minPrice}
         />
@@ -39,6 +39,8 @@ export const Filters = () => {
       <div className="flex gap-1">
         <label htmlFor={categoryFilterId}>Categoría</label>
         <select id={categoryFilterId} onChange={handleChangeCategory}>
+          <option value="all">Todas</option>
+
           <option value="corpiño">Corpiño</option>
           <option value="malla">Malla</option>
         </select>

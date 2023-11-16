@@ -14,11 +14,7 @@ import { CartProvider } from "./contexts/CartContext";
 import { UserProvider } from "./contexts/UserContext";
 import { getProducts } from "./api/product.api";
 import { useProducts } from "./hooks/useProducts";
-
-//export const userContext = React.createContext(); te olvidaste esta línea (?)
-
-const productList = ProductListJson.products; //variable común ya que sólo la leemos. No necesitamos rastrearla con state
-//la declaro fuera del componente para mejorar el rendimiento de la app, así no se evalúa con cada renderización
+import { DeleteProduct } from "./pages/components/DeleteProduct";
 
 function App() {
   const { filterProducts } = useFilters();
@@ -29,6 +25,8 @@ function App() {
     <>
       <div className="bg-background-cream">
         <UserProvider>
+          <DeleteProduct productList={filteredProducts} />
+
           <Login />
           <Register />
           <NavBar />
