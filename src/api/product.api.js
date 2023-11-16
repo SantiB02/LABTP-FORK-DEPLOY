@@ -2,7 +2,10 @@ import axios from "axios";
 
 const REACT_APP_API_URL = "https://localhost:7080/api";
 
-console.log("REACT_APP_API_URL:", REACT_APP_API_URL);
+const AuthorizationToken = () => {
+  const token = localStorage.getItem("bearerToken");
+  return `${token}`;
+};
 
 export const getProducts = async () => {
   try {
@@ -14,12 +17,34 @@ export const getProducts = async () => {
   }
 };
 
-export const postProduct = async (product) => {
-    try {
-        const response = await axios.post(`${REACT_APP_API_URL}/Product`, product);
-        return response.data;
-    } catch (error) {
-        console.error("Error posting product:", error);
-        throw error;
-    }
-    }
+export const postProduct = async (newProduct) => {
+  try {
+    const response = await axios.post(
+      `${REACT_APP_API_URL}/Product`,
+      newProduct,
+      {
+        headers: {
+          Authorization: `Bearer ${AuthorizationToken()}`,
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error posting product:", error);
+    throw error;
+  }
+};
+
+export const deleteProduct = async (id) => {
+  try {
+    const response = await axios.delete(`${REACT_APP_API_URL}/Product/${id}`, {
+      headers: {
+        Authorization: `Bearer ${AuthorizationToken()}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error deleting product:", error);
+    throw error;
+  }
+};

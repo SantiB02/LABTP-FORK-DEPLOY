@@ -1,8 +1,12 @@
 import React, { useContext, useState } from "react";
 import { ModalWrapper, ModalContent } from "./styledComponents/Modals";
 import { userContext } from "../../contexts/UserContext";
+import { useLogin } from "../../hooks/useLogin";
+import { CreateProduct } from "./CreateProduct";
+import { DeleteProduct } from "./DeleteProduct";
 
 export const Login = ({}) => {
+  const { login } = useLogin();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isPopUpActive, setIsPopUpActive] = useState(false);
@@ -19,19 +23,22 @@ export const Login = ({}) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    login({ email: email, password: password });
     setIsPopUpActive(false);
   };
 
-  const handleLogin = () => {
+  const handlePopUp = () => {
+    console.log("Estoi nose usa");
     setIsPopUpActive(true);
   };
 
-  const handleAddUser = () => {
-    setEmail(""); //Limpio los dos inputs luego de iniciar sesión
-    setPassword("");
-    const loginUser = { email, password };
-    handleUserLogin(loginUser);
-  };
+  // const handleAddUser = () => {
+  //   console.log("Estoi nose usa");
+  //   setEmail(""); //Limpio los dos inputs luego de iniciar sesión
+  //   setPassword("");
+  //   const loginUser = { email, password };
+  //   login(loginUser);
+  // };
 
   const handleCloseSession = () => {
     closeSession();
@@ -40,9 +47,10 @@ export const Login = ({}) => {
   return (
     <>
       <div>
+        <CreateProduct />
         <button
           onClick={
-            Object.keys(user).length > 0 ? handleCloseSession : handleLogin
+            Object.keys(user).length > 0 ? handleCloseSession : handlePopUp
           }
         >
           {Object.keys(user).length > 0 ? "Cerrar Sesión" : "Iniciar Sesión"}
@@ -74,7 +82,7 @@ export const Login = ({}) => {
               <button
                 className="btn bg-secondary rounded-[10px] "
                 type="submit"
-                onClick={handleAddUser}
+                onClick={handlePopUp}
               >
                 Iniciar Sesión
               </button>

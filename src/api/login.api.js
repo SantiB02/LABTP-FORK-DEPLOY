@@ -1,12 +1,32 @@
-// import axios from "axios";
+import axios from "axios";
 
-// const { REACT_APP_API_URL } = "/localhost:7080/api";
+const REACT_APP_API_URL = "https://localhost:7080/api";
 
-// export const getProducts = async () => {
-//   try {
-//     const response = await axios.get(`${REACT_APP_API_URL}/Product`);
-//     return response.data;
-//   } catch (error) {
-//     throw error;
-//   }
-// };
+export const authenticateUser = async (user) => {
+  console.log("user", user);
+  try {
+    const response = await axios.post(
+      `${REACT_APP_API_URL}/Authenticate`,
+      user
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error authenticating user:", error);
+    throw error;
+  }
+};
+
+export const getUserInfo = async (authenticationToken, email) => {
+  console.log("authenticationToken", authenticationToken, email);
+  try {
+    const response = await axios.get(`${REACT_APP_API_URL}/User/${email}`, {
+      headers: {
+        Authorization: `Bearer ${authenticationToken}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching user info:", error);
+    throw error;
+  }
+};

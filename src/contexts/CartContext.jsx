@@ -29,14 +29,12 @@ const reducer = (state, action) => {
       return newState;
 
     case "REMOVE_FROM_CART": {
-      console.log("state", state);
-      console.log("actionPayload", actionPayload);
-      const newState = state.filter((item) => item.id === actionPayload.id);
+      const newState = state.filter((item) => item.id !== actionPayload.id);
       updateLocalStorage(newState);
-      console.log("newState", newState);
       return newState;
     }
     case "CLEAR_CART": {
+      const initialState = [];
       updateLocalStorage([""]);
       return initialState;
     }
