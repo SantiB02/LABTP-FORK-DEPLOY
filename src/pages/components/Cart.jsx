@@ -1,15 +1,50 @@
 import { RemoveFromCartIcon, ClearCartIcon, CartIcon } from "./Icons";
 import { useId, useState } from "react";
 import { useCart } from "../../hooks/useCart";
+import { useLogin } from "../../hooks/useLogin";
 
 export const Cart = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const { cart, removeFromCart, clearCart, addToCart } = useCart();
+  const { user } = useLogin();
+  console.log(user);
 
-  console.log("cart", cart);
+  const userId = "";
+  if (user) {
+    const userId = user.id;
+  }
+
+  const [newSaleOrder, setNewSaleOrder] = useState({
+    SaleOrderLines: [],
+    PaymentMethod: "",
+    ClientId: userId,
+  });
 
   const toggleCart = () => {
     setIsCartOpen(!isCartOpen);
+  };
+
+  const handlePaymentMethodChange = (e) => {
+    const paymentMethod = e.target.value;
+    setNewSaleOrder((prevSaleOrder) => ({
+      ...prevSaleOrder,
+      PaymentMethod: paymentMethod,
+    }));
+  };
+
+  const handleSaleOrderCreate = () => {
+    const saleOrderLines = [];
+    console.log("CARRITO A BUSCAR", cart);
+    cart.forEach((cartItem) => {
+      saleOrderLines.push({
+        ProductId: cartItem.id,
+        QuantityOrdered: cartItem.quantity,
+      });
+    });
+    setNewSaleOrder((prevSaleOrder) => ({
+      ...prevSaleOrder,
+      SaleOrderLines: saleOrderLines,
+    }));
   };
 
   const CartItem = ({
@@ -22,7 +57,7 @@ export const Cart = () => {
   }) => {
     return (
       <li className="border-b-2">
-        <img className="aspect-auto w-screen w-10" src={imageLink} alt={name} />
+        <img className="aspect-auto w-screen w-12" src={imageLink} alt={name} />
         <div>
           <p>{name}</p> - ${price}
         </div>
@@ -71,7 +106,21 @@ export const Cart = () => {
             );
           })}
         </ul>
-        <button>Comprar</button>
+        {user ? (
+          <>
+            <label htmlFor="paymentMethod">Ingrese su medio de pago:</label>
+            <select
+              id="paymentMethod"
+              name="paymentMethod"
+              onChange={handlePaymentMethodChange}
+            >
+              <option value="1">Tarjeta de Débito</option>
+              <option value="2">Tarjeta de Crédito</option>
+              <option value="3">Billetera Virtual</option>
+            </select>
+            <button onClick={handleSaleOrderCreate}>Comprar</button>
+          </>
+        ) : null}
       </aside>
     </>
   );
