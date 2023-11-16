@@ -1,7 +1,6 @@
 import { useReducer, useRef, useState, useEffect } from "react";
 import { AddToCartIcon, RemoveFromCartIcon } from "./Icons";
 import { useCart } from "../../hooks/useCart";
-import { getProducts } from "../../api/product.api";
 
 export const ProductList = ({ products }) => {
   const { addToCart, removeFromCart, cart } = useCart();
