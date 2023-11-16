@@ -14,6 +14,7 @@ import { UserProvider } from "./contexts/UserContext";
 import { useProducts } from "./hooks/useProducts";
 import { AdminLayout } from "./pages/AdminLayout";
 import { About } from "./pages/About";
+import { useLogin } from "./hooks/useLogin";
 
 function App() {
   const { filterProducts } = useFilters();
@@ -21,10 +22,11 @@ function App() {
   const filteredProducts = filterProducts(products);
 
   return (
-    <Router>
-      <div className="bg-background-cream">
-        <UserProvider>
+    <UserProvider>
+      <Router>
+        <div className="bg-background-cream">
           <NavBar />
+          <Login />
 
           <Routes>
             <Route
@@ -37,16 +39,15 @@ function App() {
               path="/"
               element={
                 <CartProvider>
-                  <Login />
                   <Home products={filteredProducts} />
                 </CartProvider>
               }
             />
           </Routes>
           <Footer />
-        </UserProvider>
-      </div>
-    </Router>
+        </div>
+      </Router>
+    </UserProvider>
   );
 }
 

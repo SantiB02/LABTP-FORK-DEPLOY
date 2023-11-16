@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
 import BurguerButton from "./BurguerButton";
 import { useNavigate } from "react-router-dom";
 import { useLogin } from "../../hooks/useLogin";
+import { UserContext } from "../../contexts/UserContext";
 
 export const NavBar = () => {
   const [clicked, setClicked] = useState(false);
   const [showShadow, setShowShadow] = useState(false);
   const navigate = useNavigate();
-
-  const { user } = useLogin();
+  const { user } = useContext(UserContext);
 
   const handleClick = () => {
     setClicked(!clicked);
@@ -45,7 +45,11 @@ export const NavBar = () => {
           Lorem <span>Lingerie</span>
         </h2>
         <div className={`links ${clicked ? "active" : ""}`}>
-          <a onClick={() => handleLinkClick("admin")}>Dashboard</a>
+          {user?.userType === "SuperAdmin" ? (
+            <a onClick={() => handleLinkClick("admin")}>Dashboard</a>
+          ) : (
+            (console.log("User object:", user), null)
+          )}
           <a onClick={() => handleLinkClick("")}>Home</a>
           <a onClick={() => handleLinkClick("about")}>Sobre nosotros</a>
 
