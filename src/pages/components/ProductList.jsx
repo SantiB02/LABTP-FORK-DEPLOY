@@ -8,6 +8,15 @@ export const ProductList = ({ products }) => {
   const checkProductInCart = (product) => {
     return cart.some((item) => item.id === product.id);
   };
+
+  const handleColorChange = (e) => {
+    const color = e.target.value;
+  };
+
+  const handleSizeChange = (e) => {
+    const size = e.target.value;
+  };
+
   return (
     <>
       <h1>Lista de productos</h1>
@@ -19,7 +28,18 @@ export const ProductList = ({ products }) => {
             return (
               <li key={product.id}>
                 <img src={product.imageLink} alt={product.name} />
-                <p>{product.name}</p> - ${product.price}
+                <p>{product.name}</p>
+                <select name="color" onChange={handleColorChange}>
+                  <option value="1">Rojo</option>
+                  <option value="2">Azul</option>
+                  <option value="3">Verde</option>
+                </select>
+                <select name="size" onChange={handleSizeChange}>
+                  <option value="1">S</option>
+                  <option value="2">M</option>
+                  <option value="3">L</option>
+                </select>
+                <p>- ${product.price}</p>
                 <button
                   className={`p-2 rounded-xl ${
                     isProductInCart ? "bg-red-500" : "bg-red-200"

@@ -13,18 +13,18 @@ export const Cart = () => {
   };
 
   const CartItem = ({
-    thumbnail,
+    imageLink,
     price,
-    title,
+    name,
     quantity,
     addToCart,
     removeFromCart,
   }) => {
     return (
       <li className="border-b-2">
-        <img className="aspect-auto w-screen" src={thumbnail} alt={title} />
+        <img className="aspect-auto w-screen w-10" src={imageLink} alt={name} />
         <div>
-          <p>{title}</p> - ${price}
+          <p>{name}</p> - ${price}
         </div>
         <footer className="flex gap-3 justify-center align-center">
           <small>Qty:{quantity}</small>
@@ -71,6 +71,7 @@ export const Cart = () => {
             );
           })}
         </ul>
+        <button>Comprar</button>
       </aside>
     </>
   );

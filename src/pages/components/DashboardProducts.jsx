@@ -4,13 +4,10 @@ import { ModalWrapper, ModalContent } from "./styledComponents/Modals";
 import { useState } from "react";
 import { CreateProduct } from "./CreateProduct";
 
-export const DashboardProducts = () => {
+export const DashboardProducts = ({ products }) => {
   const [updatedProduct, setUpdatedProduct] = useState({});
-  const [updateModal, setUpdateModal] = useState(false);
   const [isPopUpActive, setIsPopUpActive] = useState(false);
-  const { removeProduct, products, handleProductState } = useProducts();
-
-  const { updateProduct } = useProducts();
+  const { updateProduct, removeProduct, handleProductState } = useProducts();
 
   const handleUpdateModal = () => {
     setIsPopUpActive(true);
