@@ -14,6 +14,7 @@ import { UserProvider } from "./contexts/UserContext";
 import { useProducts } from "./hooks/useProducts";
 import { AdminLayout } from "./pages/AdminLayout";
 import { About } from "./pages/About";
+import Dashboard from "./pages/components/Dashboard";
 
 function App() {
   const { filterProducts } = useFilters();
@@ -28,8 +29,8 @@ function App() {
 
           <Routes>
             <Route
-              path="/admin"
-              element={<AdminLayout products={filteredProducts} />}
+              path="/dashboard"
+              element={<Dashboard products={products} />}
             />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />

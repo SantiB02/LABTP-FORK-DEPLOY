@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import DashboardProducts from "./DashboardProducts";
 import DashboardUsers from "./DashboardUsers";
+import { DashboardProducts } from "./DashboardProducts";
 
 const Dashboard = ({ products }) => {
   const [isProductsClicked, setIsProductsClicked] = useState(false);
