@@ -28,7 +28,6 @@ export const Login = ({}) => {
   };
 
   const handlePopUp = () => {
-    console.log("Estoi nose usa");
     setIsPopUpActive(true);
   };
 
@@ -47,7 +46,6 @@ export const Login = ({}) => {
   return (
     <>
       <div>
-        <CreateProduct />
         <button
           onClick={
             Object.keys(user).length > 0 ? handleCloseSession : handlePopUp

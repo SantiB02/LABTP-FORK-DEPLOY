@@ -1,4 +1,5 @@
 import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
 import { NavBar } from "./pages/components/NavBar";
 import { Home } from "./pages/Home";
@@ -7,14 +8,11 @@ import { Register } from "./pages/Register";
 import { Login } from "./pages/components/Login";
 import ProductListJson from "./mocks/products.json";
 import { Footer } from "./pages/components/Footer";
-//import { FiltersContext } from "./contexts/FiltersContext";
-//import { useContext } from "react";
 import { useFilters } from "./hooks/useFilters";
 import { CartProvider } from "./contexts/CartContext";
 import { UserProvider } from "./contexts/UserContext";
-import { getProducts } from "./api/product.api";
 import { useProducts } from "./hooks/useProducts";
-import { DeleteProduct } from "./pages/components/DeleteProduct";
+import { AdminLayout } from "./pages/AdminLayout";
 
 function App() {
   const { filterProducts } = useFilters();
@@ -22,22 +20,37 @@ function App() {
   const filteredProducts = filterProducts(products);
 
   return (
-    <>
+    <Router>
       <div className="bg-background-cream">
         <UserProvider>
-          <DeleteProduct productList={filteredProducts} />
-
-          <Login />
-          <Register />
           <NavBar />
-          <CartProvider>
-            <Home products={filteredProducts} />
-          </CartProvider>
-          <Contact />
+
+          <Routes>
+            <Route
+              path="/admin"
+              element={
+                <AdminLayout
+                  adminData={{ name: "leo", email: "leo@leo", role: "admin" }}
+                  products={filteredProducts}
+                />
+              }
+            />
+            <Route path="/register" element={<Register />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route
+              path="/"
+              element={
+                <CartProvider>
+                  <Login />
+                  <Home products={filteredProducts} />
+                </CartProvider>
+              }
+            />
+          </Routes>
           <Footer />
         </UserProvider>
       </div>
-    </>
+    </Router>
   );
 }
 

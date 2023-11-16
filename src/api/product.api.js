@@ -48,3 +48,23 @@ export const deleteProduct = async (id) => {
     throw error;
   }
 };
+
+export const updateProductAdmin = async (updatedProduct) => {
+  console.log("llega el updated product a la api", updatedProduct);
+
+  try {
+    const response = await axios.put(
+      `${REACT_APP_API_URL}/Product/${updatedProduct.id}`,
+      updatedProduct,
+      {
+        headers: {
+          Authorization: `Bearer ${AuthorizationToken()}`,
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error updating product:", error);
+    throw error;
+  }
+};

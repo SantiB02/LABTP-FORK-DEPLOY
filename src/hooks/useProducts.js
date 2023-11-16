@@ -1,4 +1,9 @@
-import { getProducts, postProduct, deleteProduct } from "../api/product.api";
+import {
+  getProducts,
+  postProduct,
+  deleteProduct,
+  updateProductAdmin,
+} from "../api/product.api";
 import { useState, useEffect } from "react";
 
 export const useProducts = () => {
@@ -44,5 +49,17 @@ export const useProducts = () => {
     }
   };
 
-  return { products, isLoading, addProduct, removeProduct };
+  const updateProduct = async (updatedProduct) => {
+    setIsLoading(true);
+    try {
+      console.log("llega el updated product al hook", updatedProduct);
+      await updateProductAdmin(updatedProduct);
+    } catch (error) {
+      console.error("Error updating product:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return { products, isLoading, addProduct, removeProduct, updateProduct };
 };
