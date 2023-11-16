@@ -44,10 +44,14 @@ export const NavBar = () => {
           Lorem <span>Lingerie</span>
         </h2>
         <div className={`links ${clicked ? "active" : ""}`}>
+          <a onClick={() => handleLinkClick("")}>Home</a>
+
           {user?.userType === "SuperAdmin" ? (
             <a onClick={() => handleLinkClick("dashboard")}>Dashboard</a>
           ) : null}
-          <a onClick={() => handleLinkClick("")}>Home</a>
+          {user ? (
+            <a onClick={() => handleLinkClick("myaccount")}>Mi cuenta</a>
+          ) : null}
           <a onClick={() => handleLinkClick("about")}>Sobre nosotros</a>
 
           <a onClick={() => handleLinkClick("contact")}>Contacto</a>

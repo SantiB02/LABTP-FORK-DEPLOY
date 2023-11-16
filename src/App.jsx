@@ -16,6 +16,7 @@ import { AdminLayout } from "./pages/AdminLayout";
 import { About } from "./pages/About";
 import { useLogin } from "./hooks/useLogin";
 import Dashboard from "./pages/components/Dashboard";
+import { AccountMenu } from "./pages/components/AccountMenu";
 
 function App() {
   const { filterProducts } = useFilters();
@@ -36,6 +37,7 @@ function App() {
             />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/myaccount" element={<AccountMenu />} />
             <Route
               path="/"
               element={
