@@ -20,7 +20,6 @@ export function UserProvider({ children }) {
     ) {
       setUser(user); //guardo el usuario que se loguea (y ya está registrado)
       localStorage.setItem("user", JSON.stringify(user));
-      console.log(user);
       loggedUserRole = registeredUsers[foundUserIndex].role; //guardo el rol del usuario que se está logueando
       alert("Inicio de sesión exitoso. El usuario está registrado");
     } else {

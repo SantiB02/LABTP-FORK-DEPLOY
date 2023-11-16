@@ -3,7 +3,6 @@ import axios from "axios";
 const REACT_APP_API_URL = "https://localhost:7080/api";
 
 export const authenticateUser = async (user) => {
-  console.log("user", user);
   try {
     const response = await axios.post(
       `${REACT_APP_API_URL}/Authenticate`,
@@ -17,7 +16,6 @@ export const authenticateUser = async (user) => {
 };
 
 export const getUserInfo = async (authenticationToken, email) => {
-  console.log("authenticationToken", authenticationToken, email);
   try {
     const response = await axios.get(`${REACT_APP_API_URL}/User/${email}`, {
       headers: {

@@ -4,7 +4,6 @@ import { CreateProduct } from "./CreateProduct";
 import { UpdateProduct } from "./UpdateProduct";
 
 export const ProductActions = ({ productList }) => {
-  console.log("productlist", productList);
   return (
     <>
       <CreateProduct />

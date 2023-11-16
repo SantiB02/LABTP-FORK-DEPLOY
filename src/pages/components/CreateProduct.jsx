@@ -10,10 +10,7 @@ export const CreateProduct = () => {
     price: "",
     category: "",
     ImageLink: "",
-    category: "",
   });
-
-  console.log("newProduct", newProduct);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;

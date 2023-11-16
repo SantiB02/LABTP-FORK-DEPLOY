@@ -3,7 +3,6 @@ import { useProducts } from "../../hooks/useProducts";
 import { useState } from "react";
 
 export const UpdateProduct = ({ productList }) => {
-  console.log("productlist", productList);
   const [updatedProduct, setUpdatedProduct] = useState({});
   const [updateModal, setUpdateModal] = useState(false);
 

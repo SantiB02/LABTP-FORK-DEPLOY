@@ -4,14 +4,14 @@ import { userContext } from "../../contexts/UserContext";
 import { useLogin } from "../../hooks/useLogin";
 import { CreateProduct } from "./CreateProduct";
 import { DeleteProduct } from "./DeleteProduct";
+import { useNavigate } from "react-router-dom";
 
 export const Login = ({}) => {
-  const { login } = useLogin();
+  const { login, logout, user } = useLogin();
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isPopUpActive, setIsPopUpActive] = useState(false);
-
-  const { user, handleUserLogin, closeSession } = useContext(userContext);
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -31,28 +31,19 @@ export const Login = ({}) => {
     setIsPopUpActive(true);
   };
 
-  // const handleAddUser = () => {
-  //   console.log("Estoi nose usa");
-  //   setEmail(""); //Limpio los dos inputs luego de iniciar sesión
-  //   setPassword("");
-  //   const loginUser = { email, password };
-  //   login(loginUser);
-  // };
-
   const handleCloseSession = () => {
-    closeSession();
+    logout();
+    navigate("/");
   };
 
   return (
     <>
       <div>
-        <button
-          onClick={
-            Object.keys(user).length > 0 ? handleCloseSession : handlePopUp
-          }
-        >
-          {Object.keys(user).length > 0 ? "Cerrar Sesión" : "Iniciar Sesión"}
-        </button>
+        {user ? (
+          <button onClick={() => handleCloseSession()}>Cerrar sesion</button>
+        ) : (
+          <button onClick={handlePopUp}>Iniciar Sesión</button>
+        )}
       </div>
       {isPopUpActive ? (
         <ModalWrapper>

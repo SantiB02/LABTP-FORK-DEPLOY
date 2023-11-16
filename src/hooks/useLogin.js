@@ -13,6 +13,7 @@ export const useLogin = () => {
       setUser({ email });
       const response = await getUserInfo(authenticationToken, email);
       localStorage.setItem("user", JSON.stringify(response));
+      setUser(response);
     } catch (error) {
       console.error("Error authenticating user:", error);
     } finally {
@@ -20,5 +21,11 @@ export const useLogin = () => {
     }
   };
 
-  return { user, isLoading, login };
+  const logout = () => {
+    localStorage.removeItem("bearerToken");
+    localStorage.removeItem("user");
+    setUser(null);
+  };
+
+  return { user, isLoading, login, logout };
 };
