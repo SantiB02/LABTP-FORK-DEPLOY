@@ -23,7 +23,7 @@ export const Login = ({}) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    login({ email: email, password: password });
+    login({ email, password });
     setIsPopUpActive(false);
   };
 

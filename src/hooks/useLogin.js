@@ -11,7 +11,7 @@ export const useLogin = () => {
       const authenticationToken = await authenticateUser({ email, password });
       localStorage.setItem("bearerToken", authenticationToken);
       setUser({ email });
-      const response = await getUserInfo(authenticationToken, email);
+      const response = await getUserInfo(authenticationToken);
       localStorage.setItem("user", JSON.stringify(response));
     } catch (error) {
       console.error("Error authenticating user:", error);

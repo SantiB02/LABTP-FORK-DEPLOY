@@ -16,10 +16,10 @@ export const authenticateUser = async (user) => {
   }
 };
 
-export const getUserInfo = async (authenticationToken, email) => {
-  console.log("authenticationToken", authenticationToken, email);
+export const getUserInfo = async (authenticationToken) => {
+  console.log("authenticationToken", authenticationToken);
   try {
-    const response = await axios.get(`${REACT_APP_API_URL}/User/${email}`, {
+    const response = await axios.get(`${REACT_APP_API_URL}/User/UserInfo`, {
       headers: {
         Authorization: `Bearer ${authenticationToken}`,
       },
