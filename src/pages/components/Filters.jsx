@@ -39,9 +39,8 @@ export const Filters = () => {
       <div className="flex gap-1">
         <label htmlFor={categoryFilterId}>Categoría</label>
         <select id={categoryFilterId} onChange={handleChangeCategory}>
-          <option value="all">Todos</option>
-          <option value="laptops">Notebooks</option>
-          <option value="smartphones">Celulares</option>
+          <option value="corpiño">Corpiño</option>
+          <option value="malla">Malla</option>
         </select>
       </div>
     </section>

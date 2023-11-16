@@ -7,6 +7,7 @@ import { Cart } from "./components/Cart";
 import { userContext } from "../contexts/UserContext";
 
 export const Home = ({ products, changeFilters }) => {
+  
   const { user } = useContext(userContext);
   console.log("El usuario es este objeto:", user);
 

@@ -11,7 +11,9 @@ import { Footer } from "./pages/components/Footer";
 //import { useContext } from "react";
 import { useFilters } from "./hooks/useFilters";
 import { CartProvider } from "./contexts/CartContext";
-import { UserProvider } from "./contexts/userContext";
+import { UserProvider } from "./contexts/UserContext";
+import { getProducts } from "./api/product.api";
+import { useProducts } from "./hooks/useProducts";
 
 //export const userContext = React.createContext(); te olvidaste esta línea (?)
 
@@ -20,7 +22,8 @@ const productList = ProductListJson.products; //variable común ya que sólo la 
 
 function App() {
   const { filterProducts } = useFilters();
-  const filteredProducts = filterProducts(productList);
+  const { products } = useProducts();
+  const filteredProducts = filterProducts(products);
 
   return (
     <>

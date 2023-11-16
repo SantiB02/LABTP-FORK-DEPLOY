@@ -8,7 +8,7 @@ export function useFilters() {
     return products.filter((product) => {
       return (
         product.price >= filters.minPrice &&
-        (filters.category === "all" || product.category === filters.category)
+        (filters.category === "all" || product.discount === filters.category)
       );
     });
   };

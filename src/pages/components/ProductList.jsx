@@ -1,6 +1,7 @@
 import { useReducer, useRef, useState, useEffect } from "react";
 import { AddToCartIcon, RemoveFromCartIcon } from "./Icons";
 import { useCart } from "../../hooks/useCart";
+import { getProducts } from "../../api/product.api";
 
 export const ProductList = ({ products }) => {
   const { addToCart, removeFromCart, cart } = useCart();
@@ -17,28 +18,22 @@ export const ProductList = ({ products }) => {
             const isProductInCart = checkProductInCart(product);
 
             return (
-              <>
-                <li key={product.id}>
-                  <img src={product.thumbnail} alt={product.title} />
-                  <p>{product.title}</p> - ${product.price}
-                  <button
-                    className={`p-2 rounded-xl ${
-                      isProductInCart ? "bg-red-500" : "bg-red-200"
-                    }`}
-                    onClick={() => {
-                      isProductInCart
-                        ? removeFromCart(product)
-                        : addToCart(product);
-                    }}
-                  >
-                    {isProductInCart ? (
-                      <RemoveFromCartIcon />
-                    ) : (
-                      <AddToCartIcon />
-                    )}
-                  </button>
-                </li>
-              </>
+              <li key={product.id}>
+                <img src={product.imageLink} alt={product.name} />
+                <p>{product.name}</p> - ${product.price}
+                <button
+                  className={`p-2 rounded-xl ${
+                    isProductInCart ? "bg-red-500" : "bg-red-200"
+                  }`}
+                  onClick={() => {
+                    isProductInCart
+                      ? removeFromCart(product)
+                      : addToCart(product);
+                  }}
+                >
+                  {isProductInCart ? <RemoveFromCartIcon /> : <AddToCartIcon />}
+                </button>
+              </li>
             );
           })}
         </ul>

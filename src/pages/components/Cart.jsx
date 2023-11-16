@@ -24,6 +24,10 @@ export const Cart = () => {
           <button className="p-3" onClick={addToCart}>
             +
           </button>
+          <button className="p-3" onClick={removeFromCart}>
+            {" "}
+            esto que mierda hace{" "}
+          </button>
         </footer>
       </li>
     );
