@@ -1,7 +1,12 @@
 import React from "react";
+import { AdminActions } from "./AdminActions";
 
 const DashboardUsers = () => {
-  return <div>DashboardUsers</div>;
+  return (
+    <div>
+      <AdminActions />
+    </div>
+  );
 };
 
 export default DashboardUsers;

@@ -1,4 +1,5 @@
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const REACT_APP_API_URL = "https://localhost:7080/api";
 const AuthorizationToken = () => {
@@ -17,6 +18,11 @@ export const addNewAdmin = async (adminData) => {
         },
       }
     );
+    Swal.fire({
+      title: "Perfecto!",
+      text: "Se ha creado un nuevo admin",
+      confirmButtonText: "Cool",
+    });
     return response.data;
   } catch (error) {
     console.error("Error posting product:", error);

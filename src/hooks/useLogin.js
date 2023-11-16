@@ -1,5 +1,6 @@
 import { authenticateUser, getUserInfo } from "../api/login.api";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { UserContext } from "../contexts/UserContext";
 
 export const useLogin = () => {
   const [user, setUser] = useState(null);
@@ -20,6 +21,7 @@ export const useLogin = () => {
       const response = await getUserInfo(authenticationToken);
       setUser(response);
       localStorage.setItem("user", JSON.stringify(response));
+      window.location.reload();
     } catch (error) {
       console.error("Error authenticating user:", error);
     } finally {
@@ -31,6 +33,7 @@ export const useLogin = () => {
     localStorage.removeItem("bearerToken");
     localStorage.removeItem("user");
     setUser(null);
+    window.location.reload();
   };
 
   return { user, isLoading, login, logout };

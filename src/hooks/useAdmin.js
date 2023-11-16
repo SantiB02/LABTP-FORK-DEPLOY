@@ -3,6 +3,7 @@ import { useState } from "react";
 
 export const useAdmin = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [clients, setClients] = useState([]);
 
   const createNewAdmin = async (newAdmin) => {
     setIsLoading(true);
@@ -18,7 +19,9 @@ export const useAdmin = () => {
   const getAllClients = async () => {
     setIsLoading(true);
     try {
-      await getClients();
+      const getClientsResponse = await getClients();
+      setClients(getClientsResponse);
+      console.log(clients);
     } catch (error) {
       console.error("Error authenticating user:", error);
     } finally {
@@ -26,5 +29,5 @@ export const useAdmin = () => {
     }
   };
 
-  return { isLoading, createNewAdmin, getAllClients };
+  return { isLoading, createNewAdmin, getAllClients, clients };
 };
