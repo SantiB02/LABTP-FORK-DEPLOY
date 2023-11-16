@@ -10,6 +10,10 @@ export const useProducts = () => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
+  const handleProductState = (state) => {
+    setProducts(state);
+  };
+
   const fetchProducts = async () => {
     setIsLoading(true);
     try {
@@ -65,5 +69,12 @@ export const useProducts = () => {
     }
   };
 
-  return { products, isLoading, addProduct, removeProduct, updateProduct };
+  return {
+    products,
+    handleProductState,
+    isLoading,
+    addProduct,
+    removeProduct,
+    updateProduct,
+  };
 };

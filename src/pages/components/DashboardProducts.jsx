@@ -4,11 +4,11 @@ import { ModalWrapper, ModalContent } from "./styledComponents/Modals";
 import { useState } from "react";
 import { CreateProduct } from "./CreateProduct";
 
-export const DashboardProducts = ({ products }) => {
-  console.log("productlist", products);
+export const DashboardProducts = () => {
   const [updatedProduct, setUpdatedProduct] = useState({});
   const [updateModal, setUpdateModal] = useState(false);
   const [isPopUpActive, setIsPopUpActive] = useState(false);
+  const { removeProduct, products, handleProductState } = useProducts();
 
   const { updateProduct } = useProducts();
 
@@ -22,12 +22,17 @@ export const DashboardProducts = ({ products }) => {
 
   const handleUpdateProduct = () => {
     updateProduct(updatedProduct);
+    handleProductState(
+      products.map((product) =>
+        product.id === updatedProduct.id ? updatedProduct : product
+      )
+    );
     setIsPopUpActive(false);
   };
 
   return (
     <>
-      <CreateProduct />
+      <CreateProduct products={products} handleProducts={handleProductState} />
       <div className="flex justify-center">
         <ul className="flex flex-col">
           {products.map((product) => {
@@ -43,12 +48,32 @@ export const DashboardProducts = ({ products }) => {
                 <p className="mx-3">${product.price}</p>
                 {product.discount > 0 && <p>Descuento: {product.discount}</p>}
                 <button
+                  className="mx-3"
                   onClick={() => {
                     handleUpdateModal();
                     setUpdatedProduct(product);
+                    handleProductState(
+                      products.map((product) =>
+                        product.id === updatedProduct.id
+                          ? updatedProduct
+                          : product
+                      )
+                    );
                   }}
                 >
-                  Actualizar este producto
+                  Actualizar producto
+                </button>
+                <button
+                  onClick={() => {
+                    removeProduct(product.id);
+                    handleProductState(
+                      products.filter(
+                        (productFromApi) => productFromApi.id !== product.id
+                      )
+                    );
+                  }}
+                >
+                  Eliminar producto
                 </button>
               </li>
             );
@@ -103,7 +128,6 @@ export const DashboardProducts = ({ products }) => {
               <button
                 onClick={() => {
                   handleUpdateProduct();
-                  handleUpdateModal();
                 }}
               >
                 Finalizar cambios

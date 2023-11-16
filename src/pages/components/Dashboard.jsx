@@ -28,7 +28,7 @@ const Dashboard = ({ products }) => {
         </button>
       </aside>
       <div>
-        {isProductsClicked ? <DashboardProducts products={products} /> : null}
+        {isProductsClicked ? <DashboardProducts /> : null}
         {isClientsClicked ? <DashboardUsers /> : null}
       </div>
     </div>
