@@ -6,8 +6,8 @@ import { CreateProduct } from "./CreateProduct";
 import { DeleteProduct } from "./DeleteProduct";
 import { useNavigate } from "react-router-dom";
 
-export const Login = ({}) => {
-  const { login, logout, user } = useLogin();
+export const Login = ({ user }) => {
+  const { login, logout } = useLogin();
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

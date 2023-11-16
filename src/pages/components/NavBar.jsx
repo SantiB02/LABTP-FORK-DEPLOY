@@ -2,11 +2,14 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import BurguerButton from "./BurguerButton";
 import { useNavigate } from "react-router-dom";
+import { useLogin } from "../../hooks/useLogin";
 
 export const NavBar = () => {
   const [clicked, setClicked] = useState(false);
   const [showShadow, setShowShadow] = useState(false);
   const navigate = useNavigate();
+
+  const { user } = useLogin();
 
   const handleClick = () => {
     setClicked(!clicked);
