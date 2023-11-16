@@ -19,13 +19,8 @@ export const ProductList = ({ products }) => {
 
             return (
               <li key={product.id}>
-<<<<<<< Updated upstream
                 <img src={product.imageLink} alt={product.name} />
                 <p>{product.name}</p> - ${product.price}
-=======
-                <img src={product.thumbnail} alt={product.title} />
-                <p>{product.title}</p> - ${product.price}
->>>>>>> Stashed changes
                 <button
                   className={`p-2 rounded-xl ${
                     isProductInCart ? "bg-red-500" : "bg-red-200"
