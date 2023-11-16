@@ -13,6 +13,7 @@ import { CartProvider } from "./contexts/CartContext";
 import { UserProvider } from "./contexts/UserContext";
 import { useProducts } from "./hooks/useProducts";
 import { AdminLayout } from "./pages/AdminLayout";
+import { About } from "./pages/About";
 
 function App() {
   const { filterProducts } = useFilters();
@@ -28,14 +29,9 @@ function App() {
           <Routes>
             <Route
               path="/admin"
-              element={
-                <AdminLayout
-                  adminData={{ name: "leo", email: "leo@leo", role: "admin" }}
-                  products={filteredProducts}
-                />
-              }
+              element={<AdminLayout products={filteredProducts} />}
             />
-            <Route path="/register" element={<Register />} />
+            <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route
               path="/"

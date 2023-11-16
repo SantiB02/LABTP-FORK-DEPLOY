@@ -50,8 +50,6 @@ export const deleteProduct = async (id) => {
 };
 
 export const updateProductAdmin = async (updatedProduct) => {
-  console.log("llega el updated product a la api", updatedProduct);
-
   try {
     const response = await axios.put(
       `${REACT_APP_API_URL}/Product/${updatedProduct.id}`,

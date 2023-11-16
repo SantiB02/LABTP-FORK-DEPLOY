@@ -3,9 +3,7 @@ import { ProductList } from "./ProductList";
 
 export const Offers = ({ products }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const discountedProducts = products.filter(
-    (product) => product.discountPercentage > 0
-  );
+  const discountedProducts = products.filter((product) => product.discount > 0);
 
   const handleButtonClick = () => {
     setIsOpen(!isOpen);

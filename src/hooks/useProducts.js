@@ -32,7 +32,6 @@ export const useProducts = () => {
       const newProduct = await postProduct(product);
       setProducts([...products, newProduct]);
     } catch (error) {
-      console.error("Error posting product:", error);
     } finally {
       setIsLoading(false);
     }
@@ -42,6 +41,7 @@ export const useProducts = () => {
     setIsLoading(true);
     try {
       await deleteProduct(id);
+      setProducts(products.filter((product) => product.id !== id));
     } catch (error) {
       console.error("Error deleting product:", error);
     } finally {
@@ -52,8 +52,12 @@ export const useProducts = () => {
   const updateProduct = async (updatedProduct) => {
     setIsLoading(true);
     try {
-      console.log("llega el updated product al hook", updatedProduct);
       await updateProductAdmin(updatedProduct);
+      setProducts(
+        products.map((product) =>
+          product.id === updatedProduct.id ? updatedProduct : product
+        )
+      );
     } catch (error) {
       console.error("Error updating product:", error);
     } finally {

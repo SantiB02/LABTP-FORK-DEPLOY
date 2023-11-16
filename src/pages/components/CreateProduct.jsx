@@ -6,11 +6,14 @@ export const CreateProduct = () => {
   const [newProduct, setNewProduct] = useState({
     name: "",
     description: "",
-    variants: { colorId: "", sizeId: "", stock: 1 },
+    variants: { colorId: "", sizeId: "", stock: 20 },
     price: "",
     category: "",
     ImageLink: "",
+    category: "",
   });
+
+  console.log("newProduct", newProduct);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -33,6 +36,14 @@ export const CreateProduct = () => {
     setNewProduct((prevProduct) => ({
       ...prevProduct,
       variants: { ...prevProduct.variants, sizeId: size },
+    }));
+  };
+
+  const handleCategoryChange = (e) => {
+    const category = e.target.value;
+    setNewProduct((prevProduct) => ({
+      ...prevProduct,
+      category: category,
     }));
   };
 
@@ -83,13 +94,18 @@ export const CreateProduct = () => {
           value={newProduct.price}
           onChange={handleInputChange}
         />
-        <input
+        <select name="category" onChange={handleCategoryChange}>
+          <option value="Corpiños">Corpiños</option>
+          <option value="Mallas">Mallas</option>
+          <option value="Camisones">Camisones</option>
+        </select>
+        {/* <input
           type="text"
           name="category"
           placeholder="Categoria del producto"
           value={newProduct.category}
           onChange={handleInputChange}
-        />
+        /> */}
         <input
           type="text"
           name="ImageLink"

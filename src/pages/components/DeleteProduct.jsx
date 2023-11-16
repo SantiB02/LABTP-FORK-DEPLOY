@@ -3,6 +3,8 @@ import { useProducts } from "../../hooks/useProducts";
 
 export const DeleteProduct = ({ productList }) => {
   const { removeProduct } = useProducts();
+
+   
   return (
     <>
       {productList.map((product) => {

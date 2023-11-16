@@ -3,7 +3,7 @@ import { AdminActions } from "./components/AdminActions";
 import { useState } from "react";
 import { ProductActions } from "./components/ProductActions";
 
-export const AdminLayout = ({ adminData, products }) => {
+export const AdminLayout = ({ products }) => {
   const [adminModal, setAdminModal] = useState(false);
   const [productModal, setProductModal] = useState(false);
 
@@ -11,12 +11,9 @@ export const AdminLayout = ({ adminData, products }) => {
     <>
       <div style={{ width: "50vw", height: "50vh", opacity: "0.6" }}>
         <h1>Admin Layout</h1>
-        <h2>{adminData.name}</h2>
-        <h2>{adminData.email}</h2>
-        <h2>{adminData.role}</h2>
 
         <h2>Productos</h2>
-              <ProductActions productList={products} />
+        <ProductActions productList={products} />
         <h2>Usuarios</h2>
         <AdminActions />
       </div>

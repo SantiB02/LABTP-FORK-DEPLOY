@@ -7,9 +7,9 @@ export const ProductActions = ({ productList }) => {
   console.log("productlist", productList);
   return (
     <>
-      {/* <CreateProduct /> */}
+      <CreateProduct />
       <UpdateProduct productList={productList} />
-      {/* <DeleteProduct productList={productList} /> */}
+      <DeleteProduct productList={productList} />
     </>
   );
 };

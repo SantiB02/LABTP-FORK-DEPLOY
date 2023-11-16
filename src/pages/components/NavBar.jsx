@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import BurguerButton from "./BurguerButton";
+import { useNavigate } from "react-router-dom";
 
 export const NavBar = () => {
   const [clicked, setClicked] = useState(false);
   const [showShadow, setShowShadow] = useState(false);
+  const navigate = useNavigate();
 
   const handleClick = () => {
     setClicked(!clicked);
@@ -29,38 +31,22 @@ export const NavBar = () => {
   }, []);
 
   // Manejar el clic en los enlaces
-  const handleLinkClick = () => {
-    // Cerrar el menú si está abierto
-    if (clicked) {
-      setClicked(false);
-    }
+  const handleLinkClick = (navigateTo) => {
+    navigate(`/${navigateTo}`);
   };
 
   return (
     <>
       <NavContainer showShadow={showShadow} clicked={clicked}>
-        <h2>
+        <h2 style={{ cursor: "pointer" }} onClick={() => handleLinkClick("")}>
           Lorem <span>Lingerie</span>
         </h2>
         <div className={`links ${clicked ? "active" : ""}`}>
-          <a onClick={handleLinkClick} href="#dashboard">
-            Dashboard
-          </a>
-          <a onClick={handleLinkClick} href="#home">
-            Home
-          </a>
-          <a onClick={handleLinkClick} href="#shop">
-            Shop
-          </a>
-          <a onClick={handleLinkClick} href="#about">
-            About
-          </a>
-          <a onClick={handleLinkClick} href="#contact">
-            Contact
-          </a>
-          <a onClick={handleLinkClick} href="#blog">
-            Blog
-          </a>
+          <a onClick={() => handleLinkClick("admin")}>Dashboard</a>
+          <a onClick={() => handleLinkClick("")}>Home</a>
+          <a onClick={() => handleLinkClick("about")}>Sobre nosotros</a>
+
+          <a onClick={() => handleLinkClick("contact")}>Contacto</a>
         </div>
         <div className="burguer">
           <BurguerButton clicked={clicked} handleClick={handleClick} />

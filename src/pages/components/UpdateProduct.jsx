@@ -23,6 +23,9 @@ export const UpdateProduct = ({ productList }) => {
         return (
           <div className="flex flex-col">
             <h1>{product.name}</h1>
+            <h3>${product.price}</h3>
+            <p>{product.description}</p>
+            <img src={product.imageLink} alt={product.name} />
             <button
               onClick={() => {
                 handleUpdateModal();

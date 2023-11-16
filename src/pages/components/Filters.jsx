@@ -41,8 +41,9 @@ export const Filters = () => {
         <select id={categoryFilterId} onChange={handleChangeCategory}>
           <option value="all">Todas</option>
 
-          <option value="corpiño">Corpiño</option>
-          <option value="malla">Malla</option>
+          <option value="Corpiños">Corpiños</option>
+          <option value="Mallas">Mallas</option>
+          <option value="Camisones">Camisones</option>
         </select>
       </div>
     </section>
