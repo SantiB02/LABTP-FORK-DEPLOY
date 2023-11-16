@@ -43,6 +43,9 @@ export const NavBar = () => {
           Lorem <span>Lingerie</span>
         </h2>
         <div className={`links ${clicked ? "active" : ""}`}>
+          <a onClick={handleLinkClick} href="#dashboard">
+            Dashboard
+          </a>
           <a onClick={handleLinkClick} href="#home">
             Home
           </a>

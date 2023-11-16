@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import { ProductList } from "./ProductList";
 
 export const Offers = ({ products }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const discountedProducts = products.filter(product => product.discount);
+  const discountedProducts = products.filter(
+    (product) => product.discountPercentage > 0
+  );
 
   const handleButtonClick = () => {
     setIsOpen(!isOpen);
@@ -11,21 +14,9 @@ export const Offers = ({ products }) => {
   return (
     <div>
       <button onClick={handleButtonClick}>
-        {isOpen ? 'Ocultar ofertas' : 'Mostrar ofertas'}
+        {isOpen ? "Ocultar ofertas" : "Mostrar ofertas"}
       </button>
-      {isOpen && (
-        <div>
-          <h2>Ofertas</h2>
-          {discountedProducts.map((product) => (
-            <div key={product.id}>
-              <h3>{product.title}</h3>
-              <img src={product.thumbnail} alt={product.title} /> 
-              <p>{product.description}</p>
-              <p>Precio: {product.price}</p>
-            </div>
-          ))}
-        </div>
-      )}
+      {isOpen && <ProductList products={discountedProducts} />}
     </div>
   );
 };
