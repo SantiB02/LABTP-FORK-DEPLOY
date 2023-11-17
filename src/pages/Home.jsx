@@ -12,7 +12,7 @@ export const Home = ({ products, user }) => {
   return (
     <>
       {user && (
-        <div className="flex bg-secondary w-screen">
+        <div className="flex mb-5 ml-1 w-screen">
           <h1>{user && <p>¡Hola {user.name}!</p>}</h1>
         </div>
       )}

@@ -30,26 +30,34 @@ export const AccountMenu = ({ user }) => {
     deleteUserAccount();
   };
 
+  console.log(user);
+
   if (!user) {
     navigate("/");
-  } else
+  } else {
     return (
-      <div>
-        <h1>Bienvenido</h1>
-        <h2>{user.name}</h2>
-        <p>{user.email}</p>
-        <p>{user.phone}</p>
-        <p>{user.address}</p>
-        <p>{user.city}</p>
-        <p>{user.province}</p>
-        <p>{user.country}</p>
-        <p>{user.postalCode}</p>
+      <div className="h-[75vh] p-4 flex justify-center items-center flex-col w-90">
+        <h1 className="text-3xl font-bold mb-4">
+          ¡Bienvenido {user.name} {user.lastName}!
+        </h1>
+        <p className="text-white">Su correo es: {user.email}</p>
+        <p className="text-white">Su tipo de usuario es: {user.userType}</p>
+
+        <div className="grid grid-cols-2 gap-4">
+          <div>
+            <h2 className="text-xl font-semibold mb-2"></h2>
+          </div>
+        </div>
         <UpdateAccount user={user} />
-        <button onClick={() => handleDeletePopUp()}>
-          Quiero borrar mi cuenta!
+        <button
+          onClick={() => handleDeletePopUp()}
+          className="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600 mt-4 w-[20vh] h-[20vh]"
+        >
+          Quiero borrar mi cuenta
         </button>
       </div>
     );
+  }
 };
 
 // <div>

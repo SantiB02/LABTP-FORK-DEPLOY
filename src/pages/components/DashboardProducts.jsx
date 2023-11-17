@@ -30,22 +30,27 @@ export const DashboardProducts = ({ products }) => {
   return (
     <>
       <CreateProduct products={products} handleProducts={handleProductState} />
-      <div className="flex justify-center">
-        <ul className="flex flex-col">
-          {products.map((product) => {
-            return (
-              <li className="flex my-5 justify-between" key={product.id}>
-                <img
-                  className="w-16 mx-3"
-                  src={product.imageLink}
-                  alt="productImage"
-                />
-                <p className="mx-3">Código: {product.code}</p>
-                <p className="mx-3">{product.name}</p>
-                <p className="mx-3">${product.price}</p>
+      <div className="flex justify-center mt-8">
+        <ul className="flex flex-col w-full space-y-4">
+          {products.map((product) => (
+            <li
+              className="flex items-center justify-between p-4 bg-[#8b6e6e4d]  shadow-md rounded-md"
+              key={product.id}
+            >
+              <img
+                className="w-16 mr-3"
+                src={product.imageLink}
+                alt="productImage"
+              />
+              <div className="flex-1 mx-3">
+                <p>Código: {product.code}</p>
+                <p>{product.name}</p>
+                <p>${product.price}</p>
                 {product.discount > 0 && <p>Descuento: {product.discount}</p>}
+              </div>
+              <div className="flex space-x-4">
                 <button
-                  className="mx-3"
+                  className="bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600"
                   onClick={() => {
                     handleUpdateModal();
                     setUpdatedProduct(product);
@@ -58,9 +63,10 @@ export const DashboardProducts = ({ products }) => {
                     );
                   }}
                 >
-                  Actualizar producto
+                  Actualizar
                 </button>
                 <button
+                  className="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600"
                   onClick={() => {
                     removeProduct(product.id);
                     handleProductState(
@@ -70,11 +76,11 @@ export const DashboardProducts = ({ products }) => {
                     );
                   }}
                 >
-                  Eliminar producto
+                  Eliminar
                 </button>
-              </li>
-            );
-          })}
+              </div>
+            </li>
+          ))}
         </ul>
       </div>
       {isPopUpActive ? (

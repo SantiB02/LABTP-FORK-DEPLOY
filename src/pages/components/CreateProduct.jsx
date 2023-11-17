@@ -51,39 +51,38 @@ export const CreateProduct = ({ products, handleProducts }) => {
   };
 
   return (
-    <>
-      <h1>Create Product</h1>
-      <form onSubmit={handleSubmit}>
+    <div className="p-8">
+      <h1 className="text-3xl font-bold mb-4">Crear Producto</h1>
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4 text-black">
         <input
           type="text"
           name="name"
           placeholder="Nombre del producto"
           value={newProduct.name}
           onChange={handleInputChange}
+          className="border p-2"
         />
         <input
           type="text"
           name="description"
-          placeholder="Descripcion del producto"
+          placeholder="Descripción del producto"
           value={newProduct.description}
           onChange={handleInputChange}
+          className="border p-2"
         />
-        {/* <input
-          type="text"
-          name="stock"
-          placeholder="Stock del producto"
-          value={newProduct.stock}
-          onChange={handleInputChange}
-        /> */}
-        <select name="color" onChange={handleColorChange}>
+        <select
+          name="color"
+          onChange={handleColorChange}
+          className="border p-2"
+        >
           <option value="1">Rojo</option>
           <option value="2">Azul</option>
           <option value="3">Verde</option>
         </select>
-        <select name="size" onChange={handleSizeChange}>
-          <option value="1">S</option>
-          <option value="2">M</option>
-          <option value="3">L</option>
+        <select name="size" onChange={handleSizeChange} className="border p-2">
+          <option value="1">Talle S</option>
+          <option value="2">Talle M</option>
+          <option value="3">Talle L</option>
         </select>
         <input
           type="text"
@@ -91,28 +90,32 @@ export const CreateProduct = ({ products, handleProducts }) => {
           placeholder="Precio del producto"
           value={newProduct.price}
           onChange={handleInputChange}
+          className="border p-2"
         />
-        <select name="category" onChange={handleCategoryChange}>
+        <select
+          name="category"
+          onChange={handleCategoryChange}
+          className="border p-2"
+        >
           <option value="Corpiños">Corpiños</option>
           <option value="Mallas">Mallas</option>
           <option value="Camisones">Camisones</option>
         </select>
-        {/* <input
-          type="text"
-          name="category"
-          placeholder="Categoria del producto"
-          value={newProduct.category}
-          onChange={handleInputChange}
-        /> */}
         <input
           type="text"
           name="ImageLink"
           placeholder="Imagen del producto"
           value={newProduct.ImageLink}
           onChange={handleInputChange}
+          className="border p-2"
         />
-        <button type="submit">Crear</button>
+        <button
+          type="submit"
+          className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+        >
+          Crear
+        </button>
       </form>
-    </>
+    </div>
   );
 };

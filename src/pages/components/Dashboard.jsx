@@ -17,17 +17,27 @@ const Dashboard = ({ products }) => {
   };
 
   return (
-    <div>
-      <h1>Dashboard</h1>
-      <aside className="flex flex-col">
-        <button className="self-start" onClick={handleProductDashboardClick}>
+    <div className="p-8 h-[100%]">
+      <h1 className="text-3xl font-bold mb-4">Dashboard</h1>
+      <aside className="flex flex-col space-y-4">
+        <button
+          className={`p-2 text-white ${
+            isProductsClicked ? "bg-blue-500" : "bg-gray-300"
+          }`}
+          onClick={handleProductDashboardClick}
+        >
           Productos
         </button>
-        <button className="self-start" onClick={handleUserDashboardClick}>
+        <button
+          className={`p-2 text-white ${
+            isClientsClicked ? "bg-blue-500" : "bg-gray-300"
+          }`}
+          onClick={handleUserDashboardClick}
+        >
           Usuarios
         </button>
       </aside>
-      <div>
+      <div className="mt-8">
         {isProductsClicked ? <DashboardProducts products={products} /> : null}
         {isClientsClicked ? <DashboardUsers /> : null}
       </div>

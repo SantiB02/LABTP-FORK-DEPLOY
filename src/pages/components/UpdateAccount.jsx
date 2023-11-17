@@ -30,15 +30,18 @@ export const UpdateAccount = ({ user }) => {
   };
 
   return (
-    <section>
-      <h2>¿Quieres cambiar datos de tu cuenta?</h2>
-      <form onSubmit={handleSubmit}>
+    <section className="my-4">
+      <h2 className="text-2xl font-bold mb-4">
+        ¿Quieres cambiar datos de tu cuenta?
+      </h2>
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4 text-black">
         <input
           type="text"
           name="username"
           placeholder="Nombre de usuario"
           value={updatedUser.username}
           onChange={handleOnChange}
+          className="border p-2"
         />
         <input
           type="text"
@@ -46,6 +49,7 @@ export const UpdateAccount = ({ user }) => {
           placeholder="Nombre"
           value={updatedUser.name}
           onChange={handleOnChange}
+          className="border p-2"
         />
         <input
           type="text"
@@ -53,6 +57,7 @@ export const UpdateAccount = ({ user }) => {
           placeholder="Apellido"
           value={updatedUser.lastname}
           onChange={handleOnChange}
+          className="border p-2"
         />
         <input
           type="password"
@@ -60,15 +65,22 @@ export const UpdateAccount = ({ user }) => {
           placeholder="Contraseña"
           value={updatedUser.password}
           onChange={handleOnChange}
+          className="border p-2"
         />
         <input
           type="text"
           name="address"
-          placeholder="Direccion"
+          placeholder="Dirección"
           value={updatedUser.address}
           onChange={handleOnChange}
+          className="border p-2"
         />
-        <button type="submit">Actualizar datos</button>
+        <button
+          type="submit"
+          className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+        >
+          Actualizar datos
+        </button>
       </form>
     </section>
   );

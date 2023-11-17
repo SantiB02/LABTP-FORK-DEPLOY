@@ -39,30 +39,39 @@ export const Login = ({ newLogin }) => {
 
   return (
     <>
-      <div className="bg-transparent">
+      <div className="bg-transparent m-2">
         {user ? (
-          <button onClick={() => handleCloseSession()}>Cerrar sesion</button>
+          <button
+            className="w-[100%] flex  justify-end"
+            onClick={() => handleCloseSession()}
+          >
+            Cerrar sesion
+          </button>
         ) : (
           <button onClick={handlePopUp}>Iniciar Sesión</button>
         )}
       </div>
       {isPopUpActive ? (
         <ModalWrapper>
-          <div className="h-[200px] flex flex-col align-middle justify-around bg-yellow-300 mb-5">
-            <h2>Iniciar Sesión</h2>
-            <form className="flex flex-col w-100 " onSubmit={handleSubmit}>
-              <div className="flex justify-around">
+          <div className="h-[35%] flex flex-col items-center justify-around bg-[#121212] p-5 w-[30%] rounded-xl">
+            <h2 className="text-[25px]">Iniciar Sesión</h2>
+            <form className="flex flex-col" onSubmit={handleSubmit}>
+              <div className="flex justify-around mb-5">
                 <label htmlFor="email">Email:</label>
                 <input
+                  className="ml-10"
                   type="email"
                   id="email"
                   value={email}
                   onChange={handleEmailChange}
                 />
               </div>
-              <div className="flex justify-around">
-                <label htmlFor="password">Contraseña:</label>
+              <div className="flex justify-around mb-5 ">
+                <label className="mr-2" htmlFor="password">
+                  Contraseña:
+                </label>
                 <input
+                  className="ml-4 text-black"
                   type="password"
                   id="password"
                   value={password}
@@ -70,7 +79,7 @@ export const Login = ({ newLogin }) => {
                 />
               </div>
               <button
-                className="btn bg-secondary rounded-[10px] "
+                className="mt-1 btn h-[8vh] w-[40vh] bg-secondary rounded-[10px] "
                 type="submit"
                 onClick={handlePopUp}
               >

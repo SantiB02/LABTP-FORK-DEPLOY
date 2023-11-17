@@ -52,18 +52,27 @@ export const AdminActions = () => {
 
   return (
     <>
-      <section>
-        <button onClick={handleAdminModal}>Crear nuevo admin</button>
+      <section className="my-4">
+        <button
+          onClick={handleAdminModal}
+          className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+        >
+          Crear un nuevo admin
+        </button>
         {adminModal && (
           <>
-            <h2>Crear nuevo admin</h2>
-            <form onSubmit={handleSubmit}>
+            <h2 className="text-2xl font-bold my-2">Complete el formulario</h2>
+            <form
+              onSubmit={handleSubmit}
+              className="flex flex-col gap-4 text-black"
+            >
               <input
                 type="text"
                 name="email"
                 placeholder="Email"
                 value={newAdmin.email}
                 onChange={handleOnChange}
+                className="border p-2"
               />
               <input
                 type="text"
@@ -71,6 +80,7 @@ export const AdminActions = () => {
                 placeholder="Nombre"
                 value={newAdmin.name}
                 onChange={handleOnChange}
+                className="border p-2"
               />
               <input
                 type="text"
@@ -78,6 +88,7 @@ export const AdminActions = () => {
                 placeholder="Apellido"
                 value={newAdmin.lastname}
                 onChange={handleOnChange}
+                className="border p-2"
               />
               <input
                 type="password"
@@ -85,6 +96,7 @@ export const AdminActions = () => {
                 placeholder="Contraseña"
                 value={newAdmin.password}
                 onChange={handleOnChange}
+                className="border p-2"
               />
               <input
                 type="text"
@@ -92,15 +104,24 @@ export const AdminActions = () => {
                 placeholder="Nombre de usuario"
                 value={newAdmin.username}
                 onChange={handleOnChange}
+                className="border p-2"
               />
-              <button type="submit">Crear nuevo admin</button>
+              <button
+                type="submit"
+                className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+              >
+                Enviar
+              </button>
             </form>
           </>
         )}
       </section>
 
-      <section>
-        <button onClick={() => handleClientModal()}>
+      <section className="my-4">
+        <button
+          onClick={handleClientModal}
+          className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+        >
           Ver lista de clientes
         </button>
         {clientModal && (
@@ -109,14 +130,12 @@ export const AdminActions = () => {
               <>
                 {clients
                   ? clients.map((client) => (
-                      <div>
-                        <ul style={{ border: "1px solid white" }}>
-                          <li key={client.id}>
-                            Nombre de usuario: {client.userName}{" "}
-                          </li>
-                          <li key={client.id}>Nombre: {client.name} </li>
-                          <li key={client.id}>Apellido: {client.lastName} </li>
-                          <li key={client.id}>Email: {client.email} </li>
+                      <div key={client.id} className="my-4">
+                        <ul className="border p-2">
+                          <li>Nombre de usuario: {client.userName} </li>
+                          <li>Nombre: {client.name} </li>
+                          <li>Apellido: {client.lastName} </li>
+                          <li>Email: {client.email} </li>
                         </ul>
                       </div>
                     ))

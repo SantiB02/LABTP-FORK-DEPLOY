@@ -39,9 +39,9 @@ function App() {
   return (
     <UserProvider>
       <Router>
-        <div className="bg-[#121212] h-[100vh] text-white">
+        <div className="bg-[#121212] text-white w-[100%] flex flex-col justify-between overflow-x-hidden ">
           <NavBar user={user} userLogged={userLogged} />
-          <div className="p-2 flex flex-col">
+          <div className="p-2 flex flex-col  h-[100%] bg-[#121212] ">
             <Login newLogin={handleNewLogin} />
 
             <Routes>
@@ -61,8 +61,8 @@ function App() {
                 }
               />
             </Routes>
-            <Footer />
           </div>
+          <Footer />
         </div>
       </Router>
     </UserProvider>
