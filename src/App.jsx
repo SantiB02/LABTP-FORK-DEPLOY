@@ -17,6 +17,7 @@ import { useLogin } from "./hooks/useLogin";
 import Dashboard from "./pages/components/Dashboard";
 import { AccountMenu } from "./pages/components/AccountMenu";
 import { UserProvider } from "./contexts/userContext";
+import { RegisterPage } from "./pages/components/RegisterPage";
 
 function App() {
   const { filterProducts } = useFilters();
@@ -52,8 +53,9 @@ function App() {
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/myaccount" element={<AccountMenu user={user} />} />
+              <Route path="register" element={<RegisterPage />} />
               <Route
-                path="/"
+                path="*"
                 element={
                   <CartProvider>
                     <Home products={filteredProducts} user={user} />

@@ -1,5 +1,7 @@
-import { authenticateUser, getUserInfo } from "../api/login.api";
+import Swal from "sweetalert2";
+import { authenticateUser, getUserInfo } from "@babel/login.api";
 import { useState, useEffect, useContext } from "react";
+import { registerUser } from "../api/user.api";
 
 export const useLogin = () => {
   const [user, setUser] = useState(null);
@@ -35,5 +37,20 @@ export const useLogin = () => {
     setUser(null);
   };
 
-  return { user, isLoading, login, logout, getUserInfo };
+  const registerNewUser = async (newUser) => {
+    try {
+      await registerUser(newUser);
+      Swal.fire({
+        icon: "success",
+        title: "Usuario creado",
+        text: "El usuario se ha creado correctamente",
+      });
+    } catch (error) {
+      console.error("Error authenticating user:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return { user, isLoading, login, logout, getUserInfo, registerNewUser };
 };
