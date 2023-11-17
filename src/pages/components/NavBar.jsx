@@ -44,7 +44,7 @@ export const NavBar = ({ updateUser, user, userLogged }) => {
         <div className={`links ${clicked ? "active" : ""}`}>
           <a onClick={() => handleLinkClick("")}>Home</a>
 
-          {user?.userType === "SuperAdmin" ? (
+          {user?.userType === "Admin" || user?.userType === "SuperAdmin" ? (
             <a onClick={() => handleLinkClick("dashboard")}>Dashboard</a>
           ) : null}
           {user ? (
