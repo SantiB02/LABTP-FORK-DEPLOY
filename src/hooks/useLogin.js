@@ -5,13 +5,14 @@ import { UserContext } from "../contexts/UserContext";
 export const useLogin = () => {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [userAgain, setUserAgain] = useState(false);
 
   useEffect(() => {
     const user = localStorage.getItem("user");
     if (user) {
       setUser(JSON.parse(user));
     }
-  }, []);
+  }, [userAgain]);
 
   const login = async ({ email, password }) => {
     setIsLoading(true);
@@ -36,5 +37,5 @@ export const useLogin = () => {
     window.location.reload();
   };
 
-  return { user, isLoading, login, logout };
+  return { user, isLoading, login, logout, getUserInfo };
 };

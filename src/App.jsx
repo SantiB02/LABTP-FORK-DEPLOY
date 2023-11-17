@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
 import { NavBar } from "./pages/components/NavBar";
@@ -22,13 +22,26 @@ function App() {
   const { filterProducts } = useFilters();
   const { products } = useProducts();
   const filteredProducts = filterProducts(products);
+  const [userLogged, setUserLogged] = React.useState(false);
+
+  const { user } = useLogin();
+
+  const handleNewLogin = () => {
+    setUserLogged(true);
+  };
+
+  useEffect(() => {
+    if (user) {
+      setUserLogged(true);
+    }
+  }, [user]);
 
   return (
     <UserProvider>
       <Router>
         <div className="bg-background-cream">
-          <NavBar />
-          <Login />
+          <NavBar user={user} userLogged={userLogged} />
+          <Login newLogin={handleNewLogin} />
 
           <Routes>
             <Route
@@ -37,7 +50,7 @@ function App() {
             />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
-            <Route path="/myaccount" element={<AccountMenu />} />
+            <Route path="/myaccount" element={<AccountMenu user={user} />} />
             <Route
               path="/"
               element={

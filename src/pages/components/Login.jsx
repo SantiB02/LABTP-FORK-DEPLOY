@@ -6,7 +6,7 @@ import { CreateProduct } from "./CreateProduct";
 import { DeleteProduct } from "./DeleteProduct";
 import { useNavigate } from "react-router-dom";
 
-export const Login = () => {
+export const Login = ({ newLogin }) => {
   const { login, logout, user } = useLogin();
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -25,6 +25,7 @@ export const Login = () => {
     e.preventDefault();
     login({ email, password });
     setIsPopUpActive(false);
+    newLogin();
   };
 
   const handlePopUp = () => {

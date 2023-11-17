@@ -10,6 +10,7 @@ export const authenticateUser = async (user) => {
     );
     return response.data;
   } catch (error) {
+    alert(Error);
     console.error("Error authenticating user:", error);
     throw error;
   }

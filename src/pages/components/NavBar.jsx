@@ -4,11 +4,12 @@ import BurguerButton from "./BurguerButton";
 import { useNavigate } from "react-router-dom";
 import { useLogin } from "../../hooks/useLogin";
 
-export const NavBar = () => {
+export const NavBar = ({ user, isLogged }) => {
   const [clicked, setClicked] = useState(false);
   const [showShadow, setShowShadow] = useState(false);
   const navigate = useNavigate();
-  const { user } = useLogin();
+  // const { user } = useLogin();
+
 
   const handleClick = () => {
     setClicked(!clicked);

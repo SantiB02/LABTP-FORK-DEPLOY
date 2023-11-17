@@ -5,9 +5,6 @@ import { useCart } from "../../hooks/useCart";
 export const Cart = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const { cart, removeFromCart, clearCart, addToCart } = useCart();
-
-  console.log("cart", cart);
-
   const toggleCart = () => {
     setIsCartOpen(!isCartOpen);
   };
