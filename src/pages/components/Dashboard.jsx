@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import DashboardUsers from "./DashboardUsers";
 import { DashboardProducts } from "./DashboardProducts";
+import { Navigate } from "react-router-dom";
 
-const Dashboard = ({ products }) => {
+const Dashboard = ({ products, user }) => {
   const [productList, setProductList] = useState(products); // [{}
   const [isProductsClicked, setIsProductsClicked] = useState(false);
   const [isClientsClicked, setIsClientsClicked] = useState(false);
@@ -21,6 +22,9 @@ const Dashboard = ({ products }) => {
     setProductList(products);
   }, [products]);
 
+  if (user?.userType === "Client" || !user) {
+    return <Navigate to="/" replace />;
+  }
   return (
     <div className="p-8 h-[100%]">
       <h1 className="text-3xl font-bold mb-4">Dashboard</h1>
