@@ -1,5 +1,5 @@
 import Swal from "sweetalert2";
-import { authenticateUser, getUserInfo } from "@babel/login.api";
+import { authenticateUser, getUserInfo } from "../api/login.api";
 import { useState, useEffect, useContext } from "react";
 import { registerUser } from "../api/user.api";
 
