@@ -47,7 +47,7 @@ function App() {
             <Routes>
               <Route
                 path="/dashboard"
-                element={<Dashboard products={products} />}
+                element={<Dashboard products={products} user={user} />}
               />
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />

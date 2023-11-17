@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import DashboardUsers from "./DashboardUsers";
 import { DashboardProducts } from "./DashboardProducts";
 
-const Dashboard = ({ products }) => {
+const Dashboard = ({ products, user }) => {
   const [isProductsClicked, setIsProductsClicked] = useState(false);
   const [isClientsClicked, setIsClientsClicked] = useState(false);
 
@@ -28,14 +28,16 @@ const Dashboard = ({ products }) => {
         >
           Productos
         </button>
-        <button
-          className={`p-2 text-white ${
-            isClientsClicked ? "bg-blue-500" : "bg-gray-300"
-          }`}
-          onClick={handleUserDashboardClick}
-        >
-          Usuarios
-        </button>
+        {user?.userType === "SuperAdmin" && (
+          <button
+            className={`p-2 text-white ${
+              isClientsClicked ? "bg-blue-500" : "bg-gray-300"
+            }`}
+            onClick={handleUserDashboardClick}
+          >
+            Usuarios
+          </button>
+        )}
       </aside>
       <div className="mt-8">
         {isProductsClicked ? <DashboardProducts products={products} /> : null}
