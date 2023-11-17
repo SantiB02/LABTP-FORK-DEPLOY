@@ -34,6 +34,7 @@ export const Login = ({ newLogin }) => {
   const handleCloseSession = () => {
     logout();
     navigate("/");
+    window.location.reload();
   };
 
   return (

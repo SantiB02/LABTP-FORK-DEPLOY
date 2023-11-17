@@ -33,7 +33,6 @@ export const useLogin = () => {
     localStorage.removeItem("bearerToken");
     localStorage.removeItem("user");
     setUser(null);
-    window.location.reload();
   };
 
   return { user, isLoading, login, logout, getUserInfo };
