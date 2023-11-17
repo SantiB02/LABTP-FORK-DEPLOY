@@ -4,7 +4,6 @@ import { ProductList } from "./components/ProductList";
 import React from "react";
 import { Header } from "./components/Header";
 import { Cart } from "./components/Cart";
-import { UserContext } from "../contexts/UserContext";
 import { Offers } from "./components/Offers";
 import AllProducts from "./components/AllProducts";
 

@@ -10,13 +10,13 @@ import ProductListJson from "./mocks/products.json";
 import { Footer } from "./pages/components/Footer";
 import { useFilters } from "./hooks/useFilters";
 import { CartProvider } from "./contexts/CartContext";
-import { UserProvider } from "./contexts/UserContext";
 import { useProducts } from "./hooks/useProducts";
 import { AdminLayout } from "./pages/AdminLayout";
 import { About } from "./pages/About";
 import { useLogin } from "./hooks/useLogin";
 import Dashboard from "./pages/components/Dashboard";
 import { AccountMenu } from "./pages/components/AccountMenu";
+import { UserProvider } from "./contexts/UserContext";
 
 function App() {
   const { filterProducts } = useFilters();
@@ -65,7 +65,7 @@ function App() {
           <Footer />
         </div>
       </Router>
-    </UserProvider>
+    </use>
   );
 }
 

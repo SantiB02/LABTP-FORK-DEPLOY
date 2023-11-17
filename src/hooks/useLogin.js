@@ -1,6 +1,5 @@
 import { authenticateUser, getUserInfo } from "../api/login.api";
 import { useState, useEffect, useContext } from "react";
-import { UserContext } from "../contexts/UserContext";
 
 export const useLogin = () => {
   const [user, setUser] = useState(null);
