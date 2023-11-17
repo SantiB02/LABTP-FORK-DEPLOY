@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { useLogin } from "../../hooks/useLogin";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
 import { UpdateAccount } from "./UpdateAccount";
 import Swal from "sweetalert2";
 import { useUser } from "../../hooks/useUser";
@@ -32,7 +32,7 @@ export const AccountMenu = ({ user }) => {
   console.log(user);
 
   if (!user) {
-    navigate("/");
+    return <Navigate to="/" replace />;
   } else {
     return (
       <div className="h-[75vh] p-4 flex justify-center items-center flex-col w-90">
