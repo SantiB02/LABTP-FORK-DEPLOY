@@ -16,7 +16,7 @@ import { About } from "./pages/About";
 import { useLogin } from "./hooks/useLogin";
 import Dashboard from "./pages/components/Dashboard";
 import { AccountMenu } from "./pages/components/AccountMenu";
-import { UserContext } from "./contexts/userContext";
+import { UserProvider } from "./contexts/userContext";
 
 function App() {
   const { filterProducts } = useFilters();
