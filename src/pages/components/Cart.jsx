@@ -125,7 +125,7 @@ export const Cart = ({ user }) => {
             );
           })}
         </ul>
-        {user ? (
+        {user && cart.length > 0 ? (
           <>
             <label htmlFor="paymentMethod">Ingrese su medio de pago:</label>
             <select
@@ -139,7 +139,12 @@ export const Cart = ({ user }) => {
             </select>
             <button onClick={handleSaleOrderCreate}>Comprar</button>
           </>
-        ) : null}
+        ) : (
+          <p>
+            Recuerde que para comprar productos debe estar logueado y debe haber
+            por lo menos un objeto en el carrito
+          </p>
+        )}
       </aside>
     </>
   );

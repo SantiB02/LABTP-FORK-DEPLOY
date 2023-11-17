@@ -39,7 +39,7 @@ export const Login = ({ newLogin }) => {
 
   return (
     <>
-      <div>
+      <div className="bg-transparent">
         {user ? (
           <button onClick={() => handleCloseSession()}>Cerrar sesion</button>
         ) : (
@@ -48,10 +48,10 @@ export const Login = ({ newLogin }) => {
       </div>
       {isPopUpActive ? (
         <ModalWrapper>
-          <ModalContent>
+          <div className="h-[200px] flex flex-col align-middle justify-around bg-yellow-300 mb-5">
             <h2>Iniciar Sesión</h2>
-            <form onSubmit={handleSubmit}>
-              <div>
+            <form className="flex flex-col w-100 " onSubmit={handleSubmit}>
+              <div className="flex justify-around">
                 <label htmlFor="email">Email:</label>
                 <input
                   type="email"
@@ -60,7 +60,7 @@ export const Login = ({ newLogin }) => {
                   onChange={handleEmailChange}
                 />
               </div>
-              <div>
+              <div className="flex justify-around">
                 <label htmlFor="password">Contraseña:</label>
                 <input
                   type="password"
@@ -77,7 +77,7 @@ export const Login = ({ newLogin }) => {
                 Iniciar Sesión
               </button>
             </form>
-          </ModalContent>
+          </div>
         </ModalWrapper>
       ) : null}
     </>

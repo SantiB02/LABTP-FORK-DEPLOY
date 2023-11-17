@@ -20,7 +20,7 @@ import { AccountMenu } from "./pages/components/AccountMenu";
 
 function App() {
   const { filterProducts } = useFilters();
-  const { products } = useProducts();
+  const { products, handleUpdateProduct } = useProducts();
   const filteredProducts = filterProducts(products);
   const [userLogged, setUserLogged] = React.useState(false);
 
@@ -39,28 +39,30 @@ function App() {
   return (
     <UserProvider>
       <Router>
-        <div className="bg-background-cream">
+        <div className="bg-[#121212] h-[100vh] text-white">
           <NavBar user={user} userLogged={userLogged} />
-          <Login newLogin={handleNewLogin} />
+          <div className="p-2 flex flex-col">
+            <Login newLogin={handleNewLogin} />
 
-          <Routes>
-            <Route
-              path="/dashboard"
-              element={<Dashboard products={products} />}
-            />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/myaccount" element={<AccountMenu user={user} />} />
-            <Route
-              path="/"
-              element={
-                <CartProvider>
-                  <Home products={filteredProducts} user={user} />
-                </CartProvider>
-              }
-            />
-          </Routes>
-          <Footer />
+            <Routes>
+              <Route
+                path="/dashboard"
+                element={<Dashboard products={products} />}
+              />
+              <Route path="/about" element={<About />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/myaccount" element={<AccountMenu user={user} />} />
+              <Route
+                path="/"
+                element={
+                  <CartProvider>
+                    <Home products={filteredProducts} user={user} />
+                  </CartProvider>
+                }
+              />
+            </Routes>
+            <Footer />
+          </div>
         </div>
       </Router>
     </UserProvider>

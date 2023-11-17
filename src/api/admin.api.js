@@ -1,7 +1,7 @@
 import axios from "axios";
 import Swal from "sweetalert2";
 
-const REACT_APP_API_URL = "https://localhost:7080/api";
+const REACT_APP_API_URL = "https://loren-tp-programacion3.azurewebsites.net/api";
 const AuthorizationToken = () => {
   const token = localStorage.getItem("bearerToken");
   return `${token}`;

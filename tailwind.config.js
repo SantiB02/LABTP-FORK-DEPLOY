@@ -8,7 +8,7 @@ module.exports = {
         16: "repeat(10, minmax(0, 1fr))",
       },
       colors: {
-        primary: "#050816",
+        primary: "#F3E5AB",
         secondary: "#aaa6c3",
         tertiary: "#151030",
         "detail-orange": "#FF550A",

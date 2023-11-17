@@ -21,13 +21,17 @@ export const ProductList = ({ products }) => {
     <>
       <h1>Lista de productos</h1>
       <main className="w-full flex justify-center align-center">
-        <ul className="grid gap-2 bg-secondary grid-cols-5">
+        <ul className="flex flex-row justify-center ">
           {products.slice(0, 10).map((product) => {
             const isProductInCart = checkProductInCart(product);
 
             return (
               <li key={product.id}>
-                <img src={product.imageLink} alt={product.name} />
+                <img
+                  className="w-[30vh] h-[30vh]"
+                  src={product.imageLink}
+                  alt={product.name}
+                />
                 <p>{product.name}</p>
                 <select name="color" onChange={handleColorChange}>
                   <option value="1">Rojo</option>

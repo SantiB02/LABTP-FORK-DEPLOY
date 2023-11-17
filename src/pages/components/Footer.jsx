@@ -1,3 +1,3 @@
-export const Footer = ({ filters }) => {
-  return <>{JSON.stringify(filters)}</>;
+export const Footer = () => {
+  return <>Esto es un footer</>;
 };

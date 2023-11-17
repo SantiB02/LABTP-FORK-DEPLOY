@@ -9,16 +9,9 @@ import { Offers } from "./components/Offers";
 import AllProducts from "./components/AllProducts";
 
 export const Home = ({ products, user }) => {
-  // const { user } = useContext(UserContext);
-
   return (
     <>
-      {/* {Object.keys(user).length > 0 && (
-        <div className="flex bg-secondary w-screen">
-          <h1>{user && <p>Hola {user.email}</p>}</h1>
-        </div>
-      )} */}
-      <div className="flex flex-row bg-blue-300">
+      <div className="flex flex-row bg-blue-900 justify-between">
         <div className="flex flex-col">
           <Header />
           <AllProducts products={products} />

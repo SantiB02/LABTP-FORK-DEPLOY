@@ -31,7 +31,7 @@ export const UpdateAccount = ({ user }) => {
 
   return (
     <section>
-      <h2>Crear nuevo admin</h2>
+      <h2>¿Quieres cambiar datos de tu cuenta?</h2>
       <form onSubmit={handleSubmit}>
         <input
           type="text"

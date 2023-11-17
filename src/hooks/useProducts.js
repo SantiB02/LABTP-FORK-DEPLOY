@@ -5,10 +5,12 @@ import {
   updateProductAdmin,
 } from "../api/product.api";
 import { useState, useEffect } from "react";
+import Swal from "sweetalert2";
 
 export const useProducts = () => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [updateProductList, setUpdateProductList] = useState(false);
 
   const handleProductState = (state) => {
     setProducts(state);
@@ -26,9 +28,13 @@ export const useProducts = () => {
     }
   };
 
+  const handleUpdateProductList = () => {
+    setUpdateProductList(!updateProductList);
+  };
+
   useEffect(() => {
     fetchProducts();
-  }, []);
+  }, [updateProductList]);
 
   const addProduct = async (product) => {
     setIsLoading(true);
@@ -46,6 +52,12 @@ export const useProducts = () => {
     try {
       await deleteProduct(id);
       setProducts(products.filter((product) => product.id !== id));
+      Swal.fire({
+        icon: "success",
+        title: "Producto eliminado",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     } catch (error) {
       console.error("Error deleting product:", error);
     } finally {
@@ -76,5 +88,7 @@ export const useProducts = () => {
     addProduct,
     removeProduct,
     updateProduct,
+    fetchProducts,
+    handleUpdateProductList,
   };
 };

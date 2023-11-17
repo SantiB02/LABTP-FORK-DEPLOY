@@ -3,19 +3,17 @@ import styled from "styled-components";
 import BurguerButton from "./BurguerButton";
 import { useNavigate } from "react-router-dom";
 import { useLogin } from "../../hooks/useLogin";
+import { useUser } from "../../hooks/useUser";
 
-export const NavBar = ({ user, isLogged }) => {
+export const NavBar = ({ updateUser, user, userLogged }) => {
   const [clicked, setClicked] = useState(false);
   const [showShadow, setShowShadow] = useState(false);
   const navigate = useNavigate();
-  // const { user } = useLogin();
-
 
   const handleClick = () => {
     setClicked(!clicked);
   };
 
-  // Agregar o quitar sombra cuando se desplaza la página
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
@@ -33,7 +31,6 @@ export const NavBar = ({ user, isLogged }) => {
     };
   }, []);
 
-  // Manejar el clic en los enlaces
   const handleLinkClick = (navigateTo) => {
     navigate(`/${navigateTo}`);
   };
@@ -68,21 +65,24 @@ export const NavBar = ({ user, isLogged }) => {
 
 const NavContainer = styled.nav`
   h2 {
-    color: black;
+    color: white;
     font-weight: 400;
     span {
       font-weight: bold;
     }
   }
-  padding: 0.4rem;
-  background-color: #fff9fb;
+  padding: 1.5rem;
+  background-color: transparent;
   display: flex;
   align-items: center;
   justify-content: space-between;
   a {
-    color: black;
+    color: white;
     text-decoration: none;
+    margin-top: 1rem;
     margin-right: 1rem;
+    border: 2px solid gray;
+    cursor: pointer;
   }
   .links {
     position: absolute;
@@ -90,12 +90,13 @@ const NavContainer = styled.nav`
     left: -100%; /* Cambiar la posición inicial a -100% para ocultar el menú */
     width: 80%; /* Ajustar el ancho del menú según tus preferencias */
     height: 100%;
-    background-color: #fff9fb;
+    background-color: transparent;
+
     text-align: center;
     transition: all 0.5s ease;
     z-index: 0;
     a {
-      color: black;
+      color: white;
       font-size: 2rem;
       display: block;
       padding: 1rem;
@@ -109,7 +110,7 @@ const NavContainer = styled.nav`
       margin: 0;
       a {
         font-size: 1rem;
-        color: black;
+        color: white;
         display: inline;
         box-shadow: none; /* Eliminar la sombra en pantallas grandes */
       }
