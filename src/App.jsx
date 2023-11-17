@@ -65,7 +65,7 @@ function App() {
           <Footer />
         </div>
       </Router>
-    </use>
+    </UserProvider>
   );
 }
 
