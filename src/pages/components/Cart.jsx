@@ -15,23 +15,19 @@ export const Cart = ({ user }) => {
     ClientId: "",
   });
 
+  useEffect(() => {
+    if (user) {
+      setUserId(user.id);
+      setNewSaleOrder((prevSaleOrder) => ({
+        ...prevSaleOrder,
+        ClientId: user.id,
+      }));
+    }
+  }, [user]);
+
   const { cart, removeFromCart, clearCart, addToCart } = useCart();
-  console.log("USER RECIBIDO", user);
 
   const { addSaleOrder, handleSaleOrderState, saleOrders } = useSaleOrders();
-
-  useEffect(() => {
-    const updatedSaleOrder = {
-      ...newSaleOrder,
-      SaleOrderLines: saleOrderLines,
-      ClientId: userId,
-    };
-    //setSaleOrderLines(updatedSaleOrder);
-
-    // Puedes hacer algo con updatedSaleOrder si es necesario
-    console.log("ESTADO ACTUALIZADO", updatedSaleOrder);
-    // Por ejemplo, imprimir el estado actualizado
-  }, [saleOrderLines, userId, paymentMethod]);
 
   const toggleCart = () => {
     setIsCartOpen(!isCartOpen);
@@ -39,7 +35,6 @@ export const Cart = ({ user }) => {
 
   const handlePaymentMethodChange = (e) => {
     const paymentMethod = e.target.value;
-    console.log("PAYMENT", paymentMethod);
     setNewSaleOrder((prevSaleOrder) => ({
       ...prevSaleOrder,
       PaymentMethod: parseInt(paymentMethod),
@@ -47,26 +42,27 @@ export const Cart = ({ user }) => {
   };
 
   const handleSaleOrderCreate = () => {
-    const updatedSaleOrderLines = [];
-
-    cart.forEach((cartItem) => {
-      console.log("ID DEL PRODUCTO SALE ORDER", cartItem.id);
-
-      updatedSaleOrderLines = cart.map((cartItem) => ({
-        ProductId: cartItem.id,
-        QuantityOrdered: cartItem.quantity,
+    cart.map((cartItem) => {
+      console.log("CartIdem", cartItem.id, cartItem.quantity);
+      setSaleOrderLines((prevSaleOrderLines) => [
+        ...prevSaleOrderLines,
+        {
+          ProductId: cartItem.id,
+          QuantityOrdered: cartItem.quantity,
+        },
+      ]);
+      setNewSaleOrder((prevSaleOrder) => ({
+        ...prevSaleOrder,
+        SaleOrderLines: [
+          ...prevSaleOrder.SaleOrderLines,
+          {
+            ProductId: cartItem.id,
+            QuantityOrdered: cartItem.quantity,
+          },
+        ],
       }));
     });
-
-    setSaleOrderLines((prevSaleOrderLines) => [
-      ...prevSaleOrderLines,
-      ...updatedSaleOrderLines,
-    ]);
-
-    console.log("CLIENT ID", user.id);
-    console.log("SALE ORDER A MANDAR", newSaleOrder);
     addSaleOrder(newSaleOrder);
-    handleSaleOrderState([...saleOrders, newSaleOrder]);
   };
 
   const CartItem = ({

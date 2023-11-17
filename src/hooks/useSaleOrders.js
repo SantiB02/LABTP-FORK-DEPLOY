@@ -1,3 +1,4 @@
+import Swal from "sweetalert2";
 import { postSaleOrder } from "../api/saleOrder.api";
 import { useState, useEffect } from "react";
 
@@ -14,6 +15,12 @@ export const useSaleOrders = () => {
     try {
       await postSaleOrder(saleOrder);
       setSaleOrders([...saleOrders, saleOrder]);
+      Swal.fire({
+        icon: "success",
+        title: "Orden de venta creada",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     } catch (error) {
     } finally {
       setIsLoading(false);

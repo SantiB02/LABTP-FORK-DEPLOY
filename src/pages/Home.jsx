@@ -10,7 +10,6 @@ import AllProducts from "./components/AllProducts";
 
 export const Home = ({ products, user }) => {
   // const { user } = useContext(UserContext);
-  console.log("El usuario es este objeto:", user);
 
   return (
     <>

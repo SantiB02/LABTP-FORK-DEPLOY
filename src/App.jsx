@@ -36,8 +36,6 @@ function App() {
     }
   }, [user]);
 
-  console.log("user en APP", user);
-
   return (
     <UserProvider>
       <Router>
