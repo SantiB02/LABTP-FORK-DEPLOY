@@ -1,7 +1,11 @@
 import { useState } from "react";
 import { useProducts } from "../../hooks/useProducts";
 
-export const CreateProduct = ({ products, handleProducts }) => {
+export const CreateProduct = ({
+  products,
+  handleProducts,
+  handleProductList,
+}) => {
   const { addProduct } = useProducts();
   const [newProduct, setNewProduct] = useState({
     name: "",
@@ -47,7 +51,7 @@ export const CreateProduct = ({ products, handleProducts }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     addProduct(newProduct);
-    handleProducts([...products, newProduct]);
+    handleProductList([...products, newProduct]);
   };
 
   return (

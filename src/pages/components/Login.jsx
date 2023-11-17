@@ -59,7 +59,7 @@ export const Login = ({ newLogin }) => {
               <div className="flex justify-around mb-5">
                 <label htmlFor="email">Email:</label>
                 <input
-                  className="ml-10"
+                  className="ml-10 text-black"
                   type="email"
                   id="email"
                   value={email}

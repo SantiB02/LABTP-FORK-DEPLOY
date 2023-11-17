@@ -6,6 +6,8 @@ import Swal from "sweetalert2";
 export const DeleteProduct = ({ productList }) => {
   const [productListToDelete, setProductListToDelete] = useState([productList]);
 
+  console.log(productListToDelete);
+
   const { removeProduct, fetchProducts } = useProducts();
 
   return (

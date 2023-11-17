@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useProducts } from "../../hooks/useProducts";
 import { ModalWrapper, ModalContent } from "./styledComponents/Modals";
 import { useState } from "react";
 import { CreateProduct } from "./CreateProduct";
 
 export const DashboardProducts = ({ products }) => {
+  const [dashboardProductList, setDashboardProductList] = useState(products);
+  const { getProductList } = useProducts();
+  if (!products) {
+    getProductList();
+  }
+
   const [updatedProduct, setUpdatedProduct] = useState({});
   const [isPopUpActive, setIsPopUpActive] = useState(false);
   const { updateProduct, removeProduct, handleProductState } = useProducts();
@@ -19,20 +25,33 @@ export const DashboardProducts = ({ products }) => {
 
   const handleUpdateProduct = () => {
     updateProduct(updatedProduct);
-    handleProductState(
-      products.map((product) =>
+    setDashboardProductList((prevList) =>
+      prevList.map((product) =>
         product.id === updatedProduct.id ? updatedProduct : product
       )
     );
     setIsPopUpActive(false);
   };
+  const handleCreateProduct = (newProduct) => {
+    setDashboardProductList(newProduct);
+  };
+
+  useEffect(() => {
+    setDashboardProductList(products);
+  }, [products]);
+
+  console.log(dashboardProductList);
 
   return (
     <>
-      <CreateProduct products={products} handleProducts={handleProductState} />
+      <CreateProduct
+        products={products}
+        handleProducts={handleProductState}
+        handleProductList={handleCreateProduct}
+      />
       <div className="flex justify-center mt-8">
         <ul className="flex flex-col w-full space-y-4">
-          {products.map((product) => (
+          {dashboardProductList.map((product) => (
             <li
               className="flex items-center justify-between p-4 bg-[#8b6e6e4d]  shadow-md rounded-md"
               key={product.id}
@@ -54,13 +73,6 @@ export const DashboardProducts = ({ products }) => {
                   onClick={() => {
                     handleUpdateModal();
                     setUpdatedProduct(product);
-                    handleProductState(
-                      products.map((product) =>
-                        product.id === updatedProduct.id
-                          ? updatedProduct
-                          : product
-                      )
-                    );
                   }}
                 >
                   Actualizar
@@ -69,9 +81,9 @@ export const DashboardProducts = ({ products }) => {
                   className="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600"
                   onClick={() => {
                     removeProduct(product.id);
-                    handleProductState(
-                      products.filter(
-                        (productFromApi) => productFromApi.id !== product.id
+                    setDashboardProductList((prevList) =>
+                      prevList.filter(
+                        (productFromList) => productFromList.id !== product.id
                       )
                     );
                   }}
@@ -86,9 +98,12 @@ export const DashboardProducts = ({ products }) => {
       {isPopUpActive ? (
         <ModalWrapper>
           <ModalContent>
-            <div className="flex flex-col">
-              <h1>Actualizar producto</h1>
+            <div className="flex flex-col  text-white w-[100%] h-[45%]">
+              <h1 className="text-white bg-[#121212] text-[25px]">
+                Actualizar producto
+              </h1>
               <input
+                className="text-white bg-[#121212] mb-2 mt-5"
                 type="text"
                 placeholder="Nombre del producto"
                 onChange={(e) => {
@@ -99,6 +114,7 @@ export const DashboardProducts = ({ products }) => {
                 }}
               />
               <input
+                className="text-white bg-[#121212] mb-2"
                 type="text"
                 placeholder="Precio del producto"
                 onChange={(e) => {
@@ -109,6 +125,7 @@ export const DashboardProducts = ({ products }) => {
                 }}
               />
               <input
+                className="text-white bg-[#121212] mb-2"
                 type="text"
                 placeholder="Descripción del producto"
                 onChange={(e) => {
@@ -119,6 +136,7 @@ export const DashboardProducts = ({ products }) => {
                 }}
               />
               <input
+                className="text-white bg-[#121212] mb-5"
                 type="text"
                 placeholder="Link de la imagen"
                 onChange={(e) => {
@@ -129,13 +147,19 @@ export const DashboardProducts = ({ products }) => {
                 }}
               />{" "}
               <button
+                className="text-white bg-[#121212] mb-2 text-[20px] rounded-xl bg-black-200"
                 onClick={() => {
                   handleUpdateProduct();
                 }}
               >
                 Finalizar cambios
               </button>
-              <button onClick={handleCloseModal}>Cancelar</button>
+              <button
+                className="text-white bg-blue-500 mb-2 text-[20px] rounded-xl"
+                onClick={handleCloseModal}
+              >
+                Cancelar
+              </button>
             </div>
           </ModalContent>
         </ModalWrapper>

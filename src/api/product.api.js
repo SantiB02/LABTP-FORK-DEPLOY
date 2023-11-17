@@ -1,4 +1,5 @@
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const REACT_APP_API_URL =
   "https://loren-tp-programacion3.azurewebsites.net/api";
@@ -29,6 +30,12 @@ export const postProduct = async (newProduct) => {
         },
       }
     );
+    Swal.fire({
+      icon: "success",
+      title: "Producto agregado",
+      showConfirmButton: false,
+      timer: 1500,
+    });
     return response.data;
   } catch (error) {
     console.error("Error posting product:", error);
