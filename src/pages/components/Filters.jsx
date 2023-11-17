@@ -22,7 +22,7 @@ export const Filters = () => {
   };
 
   return (
-    <section className="flex align-center flex-start text-[16px]">
+    <section className="flex align-center flex-start text-[16px] text-white">
       <div className="flex gap-1">
         <label htmlFor={minPriceFilterId}>Precio a partir de:</label>
         <input
@@ -38,7 +38,11 @@ export const Filters = () => {
 
       <div className="flex gap-1">
         <label htmlFor={categoryFilterId}>Categoría</label>
-        <select id={categoryFilterId} onChange={handleChangeCategory}>
+        <select
+          className="text-white bg-[#121212]"
+          id={categoryFilterId}
+          onChange={handleChangeCategory}
+        >
           <option value="all">Todas</option>
 
           <option value="Corpiños">Corpiños</option>

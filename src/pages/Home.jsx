@@ -12,7 +12,7 @@ export const Home = ({ products, user }) => {
   return (
     <>
       <div className="flex flex-row bg-blue-900 justify-between">
-        <div className="flex flex-col">
+        <div className="flex flex-col m-2">
           <Header />
           <AllProducts products={products} />
           <Offers products={products} />
