@@ -33,8 +33,8 @@ export const useProducts = () => {
   const addProduct = async (product) => {
     setIsLoading(true);
     try {
-      const newProduct = await postProduct(product);
-      setProducts([...products, newProduct]);
+      await postProduct(product);
+      setProducts([...products, product]);
     } catch (error) {
     } finally {
       setIsLoading(false);
