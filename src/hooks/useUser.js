@@ -26,6 +26,18 @@ export const useUser = () => {
       setIsLoading(false);
     }
   };
+
+  const getUserOrderLines = async (id) => {
+    setIsLoading(true);
+    try {
+      const response = await getUser(id);
+      setProducts(response);
+    } catch (error) {
+      console.error("Error fetching user order lines:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
   return {
     deleteUserAccount,
     updateUser,

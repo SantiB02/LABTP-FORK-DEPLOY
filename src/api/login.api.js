@@ -1,7 +1,7 @@
 import axios from "axios";
 import Swal from "sweetalert2";
 
-const quefuncione = ""; 
+const quefuncione = "";
 const REACT_APP_API_URL =
   "https://loren-tp-programacion3.azurewebsites.net/api";
 
@@ -31,6 +31,16 @@ export const getUserInfo = async (authenticationToken) => {
         Authorization: `Bearer ${authenticationToken}`,
       },
     });
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching user info:", error);
+    throw error;
+  }
+};
+
+export const getSaleOrdersFromClient = async (id) => {
+  try {
+    const response = await axios.get(`${REACT_APP_API_URL}/SaleOrder/${id}`);
     return response.data;
   } catch (error) {
     console.error("Error fetching user info:", error);
