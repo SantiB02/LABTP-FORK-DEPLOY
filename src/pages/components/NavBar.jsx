@@ -50,6 +50,9 @@ export const NavBar = ({ updateUser, user, userLogged }) => {
           {user ? (
             <a onClick={() => handleLinkClick("myaccount")}>Mi cuenta</a>
           ) : null}
+                    {user?.userType == "Client" ? (
+            <a onClick={() => handleLinkClick("my-orders")}>Mis pedidos</a>
+          ) : null}
           <a onClick={() => handleLinkClick("about")}>Sobre nosotros</a>
           {!user ? (
             <a onClick={() => handleLinkClick("register")}>Registrarse</a>

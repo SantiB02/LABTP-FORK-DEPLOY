@@ -1,9 +1,14 @@
 import { useState, useEffect } from "react";
-import { deleteUserAPI, updateUserAPI } from "../api/user.api";
+import {
+  deleteUserAPI,
+  getSaleOrdersFromClient,
+  updateUserAPI,
+} from "../api/user.api";
 
 export const useUser = () => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [orders, setOrders] = useState([]);
 
   const updateUser = async (updatedUser) => {
     setIsLoading(true);
@@ -27,11 +32,12 @@ export const useUser = () => {
     }
   };
 
-  const getUserOrderLines = async (id) => {
+  const getUserSaleOrders = async (id) => {
     setIsLoading(true);
     try {
-      const response = await getUser(id);
-      setProducts(response);
+      const response = await getSaleOrdersFromClient(id);
+      console.log(response.data);
+      setOrders(response);
     } catch (error) {
       console.error("Error fetching user order lines:", error);
     } finally {
@@ -41,5 +47,7 @@ export const useUser = () => {
   return {
     deleteUserAccount,
     updateUser,
+    orders,
+    getUserSaleOrders,
   };
 };

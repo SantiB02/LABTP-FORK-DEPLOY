@@ -1,12 +1,13 @@
 import Swal from "sweetalert2";
 import { authenticateUser, getUserInfo } from "../api/login.api";
 import { useState, useEffect, useContext } from "react";
-import { registerUser } from "../api/user.api";
+import { getSaleOrdersFromClient, registerUser } from "../api/user.api";
 
 export const useLogin = () => {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [userAgain, setUserAgain] = useState(false);
+  const [saleOrders, setSaleOrders] = useState([]);
 
   useEffect(() => {
     const user = localStorage.getItem("user");
@@ -23,6 +24,9 @@ export const useLogin = () => {
       const response = await getUserInfo(authenticationToken);
       setUser(response);
       localStorage.setItem("user", JSON.stringify(response));
+      const responseFromOrders = await getSaleOrdersFromClient(response.id);
+      console.log(responseFromOrders);
+      setSaleOrders(responseFromOrders);
       window.location.reload();
     } catch (error) {
       console.error("Error authenticating user:", error);
@@ -52,5 +56,5 @@ export const useLogin = () => {
     }
   };
 
-  return { user, isLoading, login, logout, getUserInfo, registerNewUser };
+  return { user, isLoading, login, logout, getUserInfo, registerNewUser, saleOrders };
 };

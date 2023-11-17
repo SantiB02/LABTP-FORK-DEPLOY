@@ -19,6 +19,8 @@ import { AccountMenu } from "./pages/components/AccountMenu";
 import { UserProvider } from "./contexts/userContext";
 import { RegisterPage } from "./pages/components/RegisterPage";
 import { IncorrectRoute } from "./pages/components/IncorrectRoute";
+import { MyOrders } from "./pages/components/MyOrders";
+import { useUser } from "./hooks/useUser";
 
 function App() {
   const { filterProducts } = useFilters();
@@ -26,7 +28,8 @@ function App() {
   const filteredProducts = filterProducts(products);
   const [userLogged, setUserLogged] = React.useState(false);
 
-  const { user } = useLogin();
+  const { user, saleOrders } = useLogin();
+  console.log(saleOrders);
 
   const handleNewLogin = () => {
     setUserLogged(true);
@@ -54,6 +57,7 @@ function App() {
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/myaccount" element={<AccountMenu user={user} />} />
+              <Route path="/my-orders" element={<MyOrders user={user} />} />
               <Route path="register" element={<RegisterPage />} />
               <Route
                 path="/"
