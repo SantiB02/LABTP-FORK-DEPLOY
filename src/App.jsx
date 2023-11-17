@@ -36,6 +36,8 @@ function App() {
     }
   }, [user]);
 
+  console.log("user en APP", user);
+
   return (
     <UserProvider>
       <Router>
@@ -55,7 +57,7 @@ function App() {
               path="/"
               element={
                 <CartProvider>
-                  <Home products={filteredProducts} />
+                  <Home products={filteredProducts} user={user} />
                 </CartProvider>
               }
             />

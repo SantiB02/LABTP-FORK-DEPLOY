@@ -1,30 +1,37 @@
 import { RemoveFromCartIcon, ClearCartIcon, CartIcon } from "./Icons";
-import { useId, useState } from "react";
+import { useId, useState, useEffect } from "react";
 import { useCart } from "../../hooks/useCart";
 import { useLogin } from "../../hooks/useLogin";
 import { useSaleOrders } from "../../hooks/useSaleOrders";
 
-export const Cart = () => {
+export const Cart = ({ user }) => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState(null);
-  //const [userId, setUserId] = useState("");
-  const { cart, removeFromCart, clearCart, addToCart } = useCart();
-  //const { user } = useLogin();
-  const user = localStorage.getItem("user");
-
-  let userId = "";
-  if (user !== null) {
-    const parsedUser = JSON.parse(user);
-    userId = parsedUser.id;
-  }
-
-  const { addSaleOrder, handleSaleOrderState, saleOrders } = useSaleOrders();
-
+  const [saleOrderLines, setSaleOrderLines] = useState([]);
+  const [userId, setUserId] = useState("");
   const [newSaleOrder, setNewSaleOrder] = useState({
     SaleOrderLines: [],
     PaymentMethod: 1,
-    ClientId: userId,
+    ClientId: "",
   });
+
+  const { cart, removeFromCart, clearCart, addToCart } = useCart();
+  console.log("USER RECIBIDO", user);
+
+  const { addSaleOrder, handleSaleOrderState, saleOrders } = useSaleOrders();
+
+  useEffect(() => {
+    const updatedSaleOrder = {
+      ...newSaleOrder,
+      SaleOrderLines: saleOrderLines,
+      ClientId: userId,
+    };
+    //setSaleOrderLines(updatedSaleOrder);
+
+    // Puedes hacer algo con updatedSaleOrder si es necesario
+    console.log("ESTADO ACTUALIZADO", updatedSaleOrder);
+    // Por ejemplo, imprimir el estado actualizado
+  }, [saleOrderLines, userId, paymentMethod]);
 
   const toggleCart = () => {
     setIsCartOpen(!isCartOpen);
@@ -40,23 +47,23 @@ export const Cart = () => {
   };
 
   const handleSaleOrderCreate = () => {
-    const saleOrderLines = [];
+    const updatedSaleOrderLines = [];
 
     cart.forEach((cartItem) => {
       console.log("ID DEL PRODUCTO SALE ORDER", cartItem.id);
-      saleOrderLines.push({
+
+      updatedSaleOrderLines = cart.map((cartItem) => ({
         ProductId: cartItem.id,
         QuantityOrdered: cartItem.quantity,
-      });
+      }));
     });
-    setNewSaleOrder((prevSaleOrder) => ({
-      ...prevSaleOrder,
-      SaleOrderLines: saleOrderLines,
-      ClientId: userId,
-    }));
+
+    setSaleOrderLines((prevSaleOrderLines) => [
+      ...prevSaleOrderLines,
+      ...updatedSaleOrderLines,
+    ]);
 
     console.log("CLIENT ID", user.id);
-    console.log("ID DEL LOCAL", userId);
     console.log("SALE ORDER A MANDAR", newSaleOrder);
     addSaleOrder(newSaleOrder);
     handleSaleOrderState([...saleOrders, newSaleOrder]);

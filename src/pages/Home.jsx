@@ -8,9 +8,9 @@ import { UserContext } from "../contexts/UserContext";
 import { Offers } from "./components/Offers";
 import AllProducts from "./components/AllProducts";
 
-export const Home = ({ products, changeFilters }) => {
+export const Home = ({ products, user }) => {
   // const { user } = useContext(UserContext);
-  // console.log("El usuario es este objeto:", user);
+  console.log("El usuario es este objeto:", user);
 
   return (
     <>
@@ -25,7 +25,7 @@ export const Home = ({ products, changeFilters }) => {
           <AllProducts products={products} />
           <Offers products={products} />
         </div>
-        <Cart />
+        <Cart user={user} />
       </div>
     </>
   );
