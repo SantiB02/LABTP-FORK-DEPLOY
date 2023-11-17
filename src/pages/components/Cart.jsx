@@ -2,21 +2,27 @@ import { RemoveFromCartIcon, ClearCartIcon, CartIcon } from "./Icons";
 import { useId, useState } from "react";
 import { useCart } from "../../hooks/useCart";
 import { useLogin } from "../../hooks/useLogin";
+import { useSaleOrders } from "../../hooks/useSaleOrders";
 
 export const Cart = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [paymentMethod, setPaymentMethod] = useState(null);
+  //const [userId, setUserId] = useState("");
   const { cart, removeFromCart, clearCart, addToCart } = useCart();
-  const { user } = useLogin();
-  console.log(user);
+  //const { user } = useLogin();
+  const user = localStorage.getItem("user");
 
-  const userId = "";
-  if (user) {
-    const userId = user.id;
+  let userId = "";
+  if (user !== null) {
+    const parsedUser = JSON.parse(user);
+    userId = parsedUser.id;
   }
+
+  const { addSaleOrder, handleSaleOrderState, saleOrders } = useSaleOrders();
 
   const [newSaleOrder, setNewSaleOrder] = useState({
     SaleOrderLines: [],
-    PaymentMethod: "",
+    PaymentMethod: 1,
     ClientId: userId,
   });
 
@@ -26,16 +32,18 @@ export const Cart = () => {
 
   const handlePaymentMethodChange = (e) => {
     const paymentMethod = e.target.value;
+    console.log("PAYMENT", paymentMethod);
     setNewSaleOrder((prevSaleOrder) => ({
       ...prevSaleOrder,
-      PaymentMethod: paymentMethod,
+      PaymentMethod: parseInt(paymentMethod),
     }));
   };
 
   const handleSaleOrderCreate = () => {
     const saleOrderLines = [];
-    console.log("CARRITO A BUSCAR", cart);
+
     cart.forEach((cartItem) => {
+      console.log("ID DEL PRODUCTO SALE ORDER", cartItem.id);
       saleOrderLines.push({
         ProductId: cartItem.id,
         QuantityOrdered: cartItem.quantity,
@@ -44,7 +52,14 @@ export const Cart = () => {
     setNewSaleOrder((prevSaleOrder) => ({
       ...prevSaleOrder,
       SaleOrderLines: saleOrderLines,
+      ClientId: userId,
     }));
+
+    console.log("CLIENT ID", user.id);
+    console.log("ID DEL LOCAL", userId);
+    console.log("SALE ORDER A MANDAR", newSaleOrder);
+    addSaleOrder(newSaleOrder);
+    handleSaleOrderState([...saleOrders, newSaleOrder]);
   };
 
   const CartItem = ({
@@ -96,6 +111,7 @@ export const Cart = () => {
 
         <ul>
           {cart.map((product) => {
+            console.log("KEY", product.id);
             return (
               <CartItem
                 key={product.id}
