@@ -11,7 +11,6 @@ export const authenticateUser = async (user) => {
       `${REACT_APP_API_URL}/Authenticate`,
       user
     );
-    console.log(response);
     return response.data;
   } catch (error) {
     Swal.fire({
@@ -37,4 +36,3 @@ export const getUserInfo = async (authenticationToken) => {
     throw error;
   }
 };
-

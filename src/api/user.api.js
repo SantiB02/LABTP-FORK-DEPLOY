@@ -70,14 +70,16 @@ export const registerUser = async (newUser) => {
   }
 };
 
-
 export const getSaleOrdersFromClient = async (id) => {
   try {
-    const response = await axios.get(`${REACT_APP_API_URL}/SaleOrder/${id}`);
+    const response = await axios.get(`${REACT_APP_API_URL}/SaleOrder/${id}`, {
+      headers: {
+        Authorization: `Bearer ${AuthorizationToken()}`,
+      },
+    });
     return response.data;
   } catch (error) {
     console.error("Error fetching user info:", error);
     throw error;
   }
 };
-

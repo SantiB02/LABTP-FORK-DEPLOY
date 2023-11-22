@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
 import { NavBar } from "./pages/components/NavBar";
@@ -26,10 +26,9 @@ function App() {
   const { filterProducts } = useFilters();
   const { products, handleUpdateProduct } = useProducts();
   const filteredProducts = filterProducts(products);
-  const [userLogged, setUserLogged] = React.useState(false);
+  const [userLogged, setUserLogged] = useState(false);
 
-  const { user, saleOrders } = useLogin();
-  console.log(saleOrders);
+  const { user } = useLogin();
 
   const handleNewLogin = () => {
     setUserLogged(true);

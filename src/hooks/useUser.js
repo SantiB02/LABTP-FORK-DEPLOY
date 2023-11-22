@@ -8,7 +8,6 @@ import {
 export const useUser = () => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [orders, setOrders] = useState([]);
 
   const updateUser = async (updatedUser) => {
     setIsLoading(true);
@@ -37,7 +36,6 @@ export const useUser = () => {
     try {
       const response = await getSaleOrdersFromClient(id);
       console.log(response.data);
-      setOrders(response);
     } catch (error) {
       console.error("Error fetching user order lines:", error);
     } finally {
@@ -47,7 +45,6 @@ export const useUser = () => {
   return {
     deleteUserAccount,
     updateUser,
-    orders,
     getUserSaleOrders,
   };
 };

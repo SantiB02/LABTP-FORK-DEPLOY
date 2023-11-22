@@ -25,8 +25,12 @@ export const useLogin = () => {
       setUser(response);
       localStorage.setItem("user", JSON.stringify(response));
       const responseFromOrders = await getSaleOrdersFromClient(response.id);
-      console.log(responseFromOrders);
+      console.log("SALE ORDERS DEL CLIENT ACTUAL", responseFromOrders);
       setSaleOrders(responseFromOrders);
+      localStorage.setItem(
+        "userSaleOrders",
+        JSON.stringify(responseFromOrders)
+      );
       window.location.reload();
     } catch (error) {
       console.error("Error authenticating user:", error);
@@ -38,6 +42,7 @@ export const useLogin = () => {
   const logout = () => {
     localStorage.removeItem("bearerToken");
     localStorage.removeItem("user");
+    localStorage.removeItem("userSaleOrders");
     setUser(null);
   };
 
@@ -56,5 +61,13 @@ export const useLogin = () => {
     }
   };
 
-  return { user, isLoading, login, logout, getUserInfo, registerNewUser, saleOrders };
+  return {
+    user,
+    isLoading,
+    login,
+    logout,
+    getUserInfo,
+    registerNewUser,
+    saleOrders,
+  };
 };
