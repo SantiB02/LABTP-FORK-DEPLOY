@@ -66,7 +66,7 @@ export const MyOrders = ({ user }) => {
                 <p>Código: {order.orderCode}</p>
                 <p>Método de pago: {handlePaymentMethod(order)}</p>
                 <p>Fecha: {handleOrderDate(order)}</p>
-                <p>Precio total: {order.totalPrice}</p>
+                <p>Precio total: {order.totalPrice}$</p>
                 <p>
                   Estado:{" "}
                   {order.completed ? (
@@ -86,10 +86,15 @@ export const MyOrders = ({ user }) => {
                 {showSaleOrderLines ? (
                   <ul>
                     {order.saleOrderLines.map((saleOrderLine) => {
+                      const discount =
+                        saleOrderLine.product.price *
+                        (saleOrderLine.product.discount / 100);
+                      const priceWithDiscount =
+                        saleOrderLine.product.price - discount.toFixed(2);
                       return (
                         <li
                           key={saleOrderLine.id}
-                          className="my-3 border border-black border-dashed"
+                          className="my-3 p-3 border border-black border-dashed"
                         >
                           <img
                             className="w-10"
@@ -97,11 +102,25 @@ export const MyOrders = ({ user }) => {
                             alt="producto comprado"
                           />
                           <p>Nombre: {saleOrderLine.product.name}</p>
-                          <p>Precio unitario: {saleOrderLine.product.price}</p>
+                          <p>Precio unitario: {saleOrderLine.product.price}$</p>
                           {saleOrderLine.product.discount > 0 && (
-                            <p>Descuento: {saleOrderLine.product.discount}%</p>
+                            <>
+                              <p>
+                                Descuento: {saleOrderLine.product.discount}%
+                              </p>
+                              <p>Precio con descuento: {priceWithDiscount}$</p>
+                            </>
                           )}
-                          <p></p>
+                          <p>Cantidad: {saleOrderLine.quantityOrdered}</p>
+                          <p>
+                            Subtotal:{" "}
+                            {saleOrderLine.product.discount > 0
+                              ? priceWithDiscount *
+                                saleOrderLine.quantityOrdered
+                              : saleOrderLine.product.price *
+                                saleOrderLine.quantityOrdered}
+                            $
+                          </p>
                         </li>
                       );
                     })}
