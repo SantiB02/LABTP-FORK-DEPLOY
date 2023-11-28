@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useLogin } from "../../hooks/useLogin";
+import { useNavigate } from "react-router-dom";
 
 export const RegisterPage = () => {
   const [userName, setUsername] = useState("");
@@ -8,6 +9,8 @@ export const RegisterPage = () => {
   const [userAddress, setUserAddress] = useState("");
   const [userPassword, setUserPassword] = useState("");
   const [name, setName] = useState("");
+
+  const navigate = useNavigate();
 
   const { registerNewUser } = useLogin();
 
@@ -39,6 +42,7 @@ export const RegisterPage = () => {
       name: name,
     });
     e.preventDefault();
+    navigate("/");
   };
 
   return (

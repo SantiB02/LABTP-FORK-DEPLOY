@@ -1,6 +1,7 @@
 import Swal from "sweetalert2";
 import { postSaleOrder } from "../api/saleOrder.api";
 import { useState, useEffect } from "react";
+import { getSaleOrdersFromClient } from "../api/user.api";
 
 export const useSaleOrders = () => {
   const [saleOrders, setSaleOrders] = useState([]);
@@ -27,5 +28,18 @@ export const useSaleOrders = () => {
     }
   };
 
-  return { addSaleOrder, handleSaleOrderState, saleOrders };
+  const getClientSaleOrders = async () => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    const userId = user.id;
+    const responseFromOrders = await getSaleOrdersFromClient(userId);
+    setSaleOrders(responseFromOrders);
+    localStorage.setItem("userSaleOrders", JSON.stringify(responseFromOrders));
+  };
+
+  return {
+    addSaleOrder,
+    handleSaleOrderState,
+    getClientSaleOrders,
+    saleOrders,
+  };
 };

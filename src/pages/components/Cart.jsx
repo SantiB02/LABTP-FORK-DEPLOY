@@ -6,24 +6,7 @@ import { useSaleOrders } from "../../hooks/useSaleOrders";
 
 export const Cart = ({ user }) => {
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const [paymentMethod, setPaymentMethod] = useState(null);
-  const [saleOrderLines, setSaleOrderLines] = useState([]);
-  const [userId, setUserId] = useState("");
-  const [newSaleOrder, setNewSaleOrder] = useState({
-    SaleOrderLines: [],
-    PaymentMethod: 1,
-    ClientId: "",
-  });
-
-  useEffect(() => {
-    if (user) {
-      setUserId(user.id);
-      setNewSaleOrder((prevSaleOrder) => ({
-        ...prevSaleOrder,
-        ClientId: user.id,
-      }));
-    }
-  }, [user]);
+  const [paymentMethod, setPaymentMethod] = useState(1);
 
   const { cart, removeFromCart, clearCart, addToCart } = useCart();
 
@@ -34,35 +17,22 @@ export const Cart = ({ user }) => {
   };
 
   const handlePaymentMethodChange = (e) => {
-    const paymentMethod = e.target.value;
-    setNewSaleOrder((prevSaleOrder) => ({
-      ...prevSaleOrder,
-      PaymentMethod: parseInt(paymentMethod),
-    }));
+    setPaymentMethod(e.target.value);
   };
 
   const handleSaleOrderCreate = () => {
+    let saleOrderLines = [];
     cart.map((cartItem) => {
-      console.log("CartIdem", cartItem.id, cartItem.quantity);
-      setSaleOrderLines((prevSaleOrderLines) => [
-        ...prevSaleOrderLines,
-        {
-          ProductId: cartItem.id,
-          QuantityOrdered: cartItem.quantity,
-        },
-      ]);
-      setNewSaleOrder((prevSaleOrder) => ({
-        ...prevSaleOrder,
-        SaleOrderLines: [
-          ...prevSaleOrder.SaleOrderLines,
-          {
-            ProductId: cartItem.id,
-            QuantityOrdered: cartItem.quantity,
-          },
-        ],
-      }));
+      saleOrderLines = [
+        ...saleOrderLines,
+        { productId: cartItem.id, quantityOrdered: cartItem.quantity },
+      ];
     });
-    addSaleOrder(newSaleOrder);
+    addSaleOrder({
+      saleOrderLines,
+      paymentMethod,
+      ClientId: user.id,
+    });
   };
 
   const CartItem = ({

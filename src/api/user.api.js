@@ -63,7 +63,7 @@ export const deleteUserAPI = async () => {
 export const registerUser = async (newUser) => {
   try {
     const response = await axios.post(`${REACT_APP_API_URL}/User`, newUser);
-    return response.data;
+    return response;
   } catch (error) {
     console.error("Error authenticating user:", error);
     throw error;

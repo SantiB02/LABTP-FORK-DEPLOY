@@ -1,19 +1,26 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, Navigate } from "react-router-dom";
 import { useLogin } from "../../hooks/useLogin";
+import { useSaleOrders } from "../../hooks/useSaleOrders";
 
 export const MyOrders = ({ user }) => {
   const [showSaleOrderLines, setShowSaleOrderLines] = useState(false);
+  const [orderDetailsVisibility, setOrderDetailsVisibility] = useState([]);
   const navigate = useNavigate();
+  const { getClientSaleOrders } = useSaleOrders();
+
+  useEffect(() => {
+    getClientSaleOrders();
+  }, []);
 
   const handlePaymentMethod = (order) => {
     //mapeo el string del método de pago según el valor del enum del back-end. Se ejecuta directamente en el elemento a renderizar
     switch (order.paymentMethod) {
-      case 0:
-        return "Tarjeta de débito";
       case 1:
-        return "Tarjeta de crédito";
+        return "Tarjeta de débito";
       case 2:
+        return "Tarjeta de crédito";
+      case 3:
         return "Billetera virtual";
       default:
         return "ERROR!";
@@ -44,14 +51,22 @@ export const MyOrders = ({ user }) => {
     return `${day} de ${month} de ${year}`;
   };
 
-  const handleSaleOrderLines = () => {
-    setShowSaleOrderLines(!showSaleOrderLines);
-  };
+  const handleSaleOrderLines = (orderId) => {
+    setOrderDetailsVisibility((prevVisibility) => {
+      const newVisibility = [...prevVisibility];
+      const index = newVisibility.indexOf(orderId);
 
-  console.log(
-    "ORDERS RECIBIDAS",
-    JSON.parse(localStorage.getItem("userSaleOrders"))
-  );
+      if (index !== -1) {
+        // La orden está actualmente visible, ocultarla
+        newVisibility.splice(index, 1);
+      } else {
+        // La orden está oculta, mostrarla
+        newVisibility.push(orderId);
+      }
+
+      return newVisibility;
+    });
+  };
 
   const handleLinkClick = (navigateTo) => {
     navigate(`/${navigateTo}`);
@@ -64,9 +79,10 @@ export const MyOrders = ({ user }) => {
     return (
       <div>
         <h1>Tus pedidos</h1>
-        {JSON.parse(localStorage.getItem("userSaleOrders")) ? (
+        {JSON.parse(localStorage.getItem("userSaleOrders")).length > 0 ? (
           <ul>
             {JSON.parse(localStorage.getItem("userSaleOrders")).map((order) => {
+              console.log("HAY");
               return (
                 <li key={order.id} className="my-5 bg-teal-900 p-2">
                   <p>Código: {order.orderCode}</p>
@@ -82,14 +98,14 @@ export const MyOrders = ({ user }) => {
                     )}
                   </p>
                   <button
-                    onClick={handleSaleOrderLines}
+                    onClick={() => handleSaleOrderLines(order.id)}
                     className="my-2 border border-white p-2 mx-3"
                   >
-                    {showSaleOrderLines
+                    {orderDetailsVisibility.includes(order.id)
                       ? "Ocultar detalles de compra"
                       : "Ver detalles de compra"}
                   </button>
-                  {showSaleOrderLines ? (
+                  {orderDetailsVisibility.includes(order.id) ? (
                     <ul>
                       {order.saleOrderLines.map((saleOrderLine) => {
                         const discount =

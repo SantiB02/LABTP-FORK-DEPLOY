@@ -1,7 +1,7 @@
 import Swal from "sweetalert2";
 import { authenticateUser, getUserInfo } from "../api/login.api";
 import { useState, useEffect, useContext } from "react";
-import { getSaleOrdersFromClient, registerUser } from "../api/user.api";
+import { registerUser } from "../api/user.api";
 
 export const useLogin = () => {
   const [user, setUser] = useState(null);
@@ -22,15 +22,9 @@ export const useLogin = () => {
       const authenticationToken = await authenticateUser({ email, password });
       localStorage.setItem("bearerToken", authenticationToken);
       const response = await getUserInfo(authenticationToken);
+      console.log("RESPONSE DEL AWAIT", response);
       setUser(response);
       localStorage.setItem("user", JSON.stringify(response));
-      const responseFromOrders = await getSaleOrdersFromClient(response.id);
-      console.log("SALE ORDERS DEL CLIENT ACTUAL", responseFromOrders);
-      setSaleOrders(responseFromOrders);
-      localStorage.setItem(
-        "userSaleOrders",
-        JSON.stringify(responseFromOrders)
-      );
       window.location.reload();
     } catch (error) {
       console.error("Error authenticating user:", error);
@@ -48,13 +42,19 @@ export const useLogin = () => {
 
   const registerNewUser = async (newUser) => {
     try {
-      await registerUser(newUser);
+      const registerResponse = await registerUser(newUser);
+      console.log("RESPONSE DE REGISTRO", registerResponse);
       Swal.fire({
         icon: "success",
         title: "Usuario creado",
         text: "El usuario se ha creado correctamente",
       });
     } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Usuario inválido",
+        text: "El usuario ingresado ya se encuentra creado o tiene datos erróneos",
+      });
       console.error("Error authenticating user:", error);
     } finally {
       setIsLoading(false);

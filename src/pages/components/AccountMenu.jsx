@@ -40,7 +40,10 @@ export const AccountMenu = ({ user }) => {
           ¡Bienvenido {user.name} {user.lastName}!
         </h1>
         <p className="text-white">Su correo es: {user.email}</p>
-        <p className="text-white">Su tipo de usuario es: {user.userType}</p>
+        <p className="text-white">
+          Su tipo de usuario es:{" "}
+          {user.userType === "Client" ? "Cliente" : user.userType}
+        </p>
 
         <div className="grid grid-cols-2 gap-4">
           <div>
