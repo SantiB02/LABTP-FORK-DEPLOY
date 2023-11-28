@@ -2,21 +2,38 @@ import React, { useState, useEffect } from "react";
 import DashboardUsers from "./DashboardUsers";
 import { DashboardProducts } from "./DashboardProducts";
 import { Navigate } from "react-router-dom";
+import { DashboardSaleOrders } from "./DashboardSaleOrders";
+import { useSaleOrders } from "../../hooks/useSaleOrders";
 
 const Dashboard = ({ products, user }) => {
-  const [productList, setProductList] = useState(products); // [{}
+  const [productList, setProductList] = useState(products);
   const [isProductsClicked, setIsProductsClicked] = useState(false);
   const [isClientsClicked, setIsClientsClicked] = useState(false);
+  const [isSaleOrdersClicked, setIsSaleOrdersClicked] = useState(false);
+
+  const { getAllSaleOrders, allSaleOrders } = useSaleOrders();
 
   const handleProductDashboardClick = () => {
     setIsProductsClicked(true);
     setIsClientsClicked(false);
+    setIsSaleOrdersClicked(false);
   };
 
   const handleUserDashboardClick = () => {
     setIsClientsClicked(true);
     setIsProductsClicked(false);
+    setIsSaleOrdersClicked(false);
   };
+
+  const handleSaleOrdersDashboardClick = () => {
+    setIsSaleOrdersClicked(true);
+    setIsProductsClicked(false);
+    setIsClientsClicked(false);
+  };
+
+  useEffect(() => {
+    getAllSaleOrders();
+  }, []);
 
   useEffect(() => {
     setProductList(products);
@@ -45,12 +62,23 @@ const Dashboard = ({ products, user }) => {
         >
           Usuarios
         </button>
+        <button
+          className={`p-2 text-white ${
+            isSaleOrdersClicked ? "bg-blue-500" : "bg-gray-300"
+          }`}
+          onClick={handleSaleOrdersDashboardClick}
+        >
+          Órdenes de venta
+        </button>
       </aside>
       <div className="mt-8">
         {isProductsClicked ? (
           <DashboardProducts products={productList} />
         ) : null}
         {isClientsClicked ? <DashboardUsers /> : null}
+        {isSaleOrdersClicked ? (
+          <DashboardSaleOrders allSaleOrders={allSaleOrders} />
+        ) : null}
       </div>
     </div>
   );

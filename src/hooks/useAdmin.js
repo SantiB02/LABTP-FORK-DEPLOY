@@ -21,7 +21,6 @@ export const useAdmin = () => {
     try {
       const getClientsResponse = await getClients();
       setClients(getClientsResponse);
-      console.log(clients);
     } catch (error) {
       console.error("Error authenticating user:", error);
     } finally {

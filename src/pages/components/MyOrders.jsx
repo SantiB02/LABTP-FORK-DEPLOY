@@ -4,7 +4,6 @@ import { useLogin } from "../../hooks/useLogin";
 import { useSaleOrders } from "../../hooks/useSaleOrders";
 
 export const MyOrders = ({ user }) => {
-  const [showSaleOrderLines, setShowSaleOrderLines] = useState(false);
   const [orderDetailsVisibility, setOrderDetailsVisibility] = useState([]);
   const navigate = useNavigate();
   const { getClientSaleOrders } = useSaleOrders();
@@ -13,7 +12,7 @@ export const MyOrders = ({ user }) => {
     getClientSaleOrders();
   }, []);
 
-  const handlePaymentMethod = (order) => {
+  const mapPaymentMethod = (order) => {
     //mapeo el string del método de pago según el valor del enum del back-end. Se ejecuta directamente en el elemento a renderizar
     switch (order.paymentMethod) {
       case 1:
@@ -27,7 +26,7 @@ export const MyOrders = ({ user }) => {
     }
   };
 
-  const handleOrderDate = (order) => {
+  const mapOrderDate = (order) => {
     const monthsInSpanish = [
       "enero",
       "febrero",
@@ -82,12 +81,11 @@ export const MyOrders = ({ user }) => {
         {JSON.parse(localStorage.getItem("userSaleOrders")).length > 0 ? (
           <ul>
             {JSON.parse(localStorage.getItem("userSaleOrders")).map((order) => {
-              console.log("HAY");
               return (
                 <li key={order.id} className="my-5 bg-teal-900 p-2">
                   <p>Código: {order.orderCode}</p>
-                  <p>Método de pago: {handlePaymentMethod(order)}</p>
-                  <p>Fecha: {handleOrderDate(order)}</p>
+                  <p>Método de pago: {mapPaymentMethod(order)}</p>
+                  <p>Fecha: {mapOrderDate(order)}</p>
                   <p>Precio total: {order.totalPrice}$</p>
                   <p>
                     Estado:{" "}

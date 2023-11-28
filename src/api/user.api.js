@@ -39,7 +39,7 @@ export const deleteUserAPI = async () => {
       },
     });
     Swal.fire({
-      title: "Perfecto!",
+      title: "Espere...",
       text: "Seguro quiere borrar su cuenta?",
       confirmButtonText: "Si :(",
       showCancelButton: true,
@@ -55,7 +55,7 @@ export const deleteUserAPI = async () => {
     return response.data;
   } catch (error) {
     console.log(error);
-    console.error("Error updating product:", error);
+    console.error("Error deleting product:", error);
     throw error;
   }
 };
