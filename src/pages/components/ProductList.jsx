@@ -28,7 +28,7 @@ export const ProductList = ({ products }) => {
             return (
               <li
                 key={product.id}
-                className="m-5 flex flex-col justify-center align-middle"
+                className="m-5 flex flex-col justify-center "
               >
                 <img
                   className="w-[30vh] h-[30vh]"
@@ -66,11 +66,11 @@ export const ProductList = ({ products }) => {
                   }}
                 >
                   {isProductInCart ? (
-                    <div className="text-black text-center ml-1">
+                    <div className="text-black text-center ml-3">
                       <RemoveFromCartIcon />{" "}
                     </div>
                   ) : (
-                    <div className="text-black text-center ml-1">
+                    <div className="text-black text-center ml-3">
                       <AddToCartIcon />
                     </div>
                   )}
