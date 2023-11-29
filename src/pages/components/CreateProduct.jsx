@@ -55,7 +55,7 @@ export const CreateProduct = ({
   };
 
   return (
-    <div className="p-8">
+    <div className="mb-5">
       <h1 className="text-3xl font-bold mb-4">Crear Producto</h1>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4 text-black">
         <input

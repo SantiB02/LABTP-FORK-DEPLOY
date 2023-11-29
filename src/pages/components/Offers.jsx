@@ -10,7 +10,7 @@ export const Offers = ({ products }) => {
   };
 
   return (
-    <div className="p-4 rounded-md shadow-md my-4">
+    <div className="p-4 rounded-md ml-5 my-10">
       <button
         className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition"
         onClick={handleButtonClick}

@@ -52,7 +52,7 @@ export const completeSaleOrderAPI = async (orderId) => {
         },
       }
     );
-    window.location.reload();
+    // window.location.reload();
   } catch (error) {
     console.error("Error posting sale order:", error);
     throw error;
@@ -61,22 +61,11 @@ export const completeSaleOrderAPI = async (orderId) => {
 
 export const deleteSaleOrderAPI = async (orderId) => {
   try {
-    const result = await Swal.fire({
-      title: "Espere...",
-      text: "¿Seguro quiere borrar esta orden de venta?",
-      confirmButtonText: "Si :(",
-      showCancelButton: true,
-      cancelButtonText: "Cancelar",
+    await axios.delete(`${REACT_APP_API_URL}/SaleOrder/${orderId}`, {
+      headers: {
+        Authorization: `Bearer ${AuthorizationToken()}`,
+      },
     });
-
-    if (result.isConfirmed) {
-      await axios.delete(`${REACT_APP_API_URL}/SaleOrder/${orderId}`, {
-        headers: {
-          Authorization: `Bearer ${AuthorizationToken()}`,
-        },
-      });
-      window.location.reload();
-    }
   } catch (error) {
     console.log(error);
     console.error("Error deleting product:", error);

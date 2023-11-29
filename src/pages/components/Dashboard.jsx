@@ -7,7 +7,7 @@ import { useSaleOrders } from "../../hooks/useSaleOrders";
 
 const Dashboard = ({ products, user }) => {
   const [productList, setProductList] = useState(products);
-  const [isProductsClicked, setIsProductsClicked] = useState(false);
+  const [isProductsClicked, setIsProductsClicked] = useState(true);
   const [isClientsClicked, setIsClientsClicked] = useState(false);
   const [isSaleOrdersClicked, setIsSaleOrdersClicked] = useState(false);
 
@@ -43,44 +43,47 @@ const Dashboard = ({ products, user }) => {
     return <Navigate to="/" replace />;
   }
   return (
-    <div className="p-8 h-[100%]">
-      <h1 className="text-3xl font-bold mb-4">Dashboard</h1>
-      <aside className="flex flex-col space-y-4">
-        <button
-          className={`p-2 text-white ${
-            isProductsClicked ? "bg-blue-500" : "bg-gray-300"
-          }`}
-          onClick={handleProductDashboardClick}
-        >
-          Productos
-        </button>
-        <button
-          className={`p-2 text-white ${
-            isClientsClicked ? "bg-blue-500" : "bg-gray-300"
-          }`}
-          onClick={handleUserDashboardClick}
-        >
-          Usuarios
-        </button>
-        <button
-          className={`p-2 text-white ${
-            isSaleOrdersClicked ? "bg-blue-500" : "bg-gray-300"
-          }`}
-          onClick={handleSaleOrdersDashboardClick}
-        >
-          Órdenes de venta
-        </button>
-      </aside>
-      <div className="mt-8">
-        {isProductsClicked ? (
-          <DashboardProducts products={productList} />
-        ) : null}
-        {isClientsClicked ? <DashboardUsers /> : null}
-        {isSaleOrdersClicked ? (
-          <DashboardSaleOrders allSaleOrders={allSaleOrders} />
-        ) : null}
+    <>
+      <div className="flex ml-7 flex-row justify-start align-center h-[100%] min-h-[80vh]	mb-[50px] ">
+        <aside className="flex flex-col space-y-4 mr-10">
+          <h1 className="text-3xl font-bold mb-4">Dashboard</h1>
+
+          <button
+            className={`w-[100%] p-2 text-white ${
+              isProductsClicked ? "bg-blue-500" : "bg-[#151130]"
+            }`}
+            onClick={handleProductDashboardClick}
+          >
+            Productos
+          </button>
+          <button
+            className={`w-[100%] p-2 text-white ${
+              isClientsClicked ? "bg-blue-500" : "bg-[#151130]"
+            }`}
+            onClick={handleUserDashboardClick}
+          >
+            Usuarios
+          </button>
+          <button
+            className={`w-[100%] p-2 text-white ${
+              isSaleOrdersClicked ? "bg-blue-500" : "bg-[#151130]"
+            }`}
+            onClick={handleSaleOrdersDashboardClick}
+          >
+            Órdenes de venta
+          </button>
+        </aside>
+        <div className="">
+          {isProductsClicked ? (
+            <DashboardProducts products={productList} />
+          ) : null}
+          {isClientsClicked ? <DashboardUsers /> : null}
+          {isSaleOrdersClicked ? (
+            <DashboardSaleOrders allSaleOrders={allSaleOrders} />
+          ) : null}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

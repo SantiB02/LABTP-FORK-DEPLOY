@@ -33,6 +33,7 @@ export const Cart = ({ user }) => {
       paymentMethod,
       ClientId: user.id,
     });
+    clearCart();
   };
 
   const CartItem = ({
@@ -77,71 +78,80 @@ export const Cart = ({ user }) => {
 
   return (
     <>
-      <label
-        className="cursor-pointer"
-        htmlFor={cartCheckboxId}
-        onClick={toggleCart}
-      >
-        <CartIcon />
-      </label>
-      <input id={cartCheckboxId} type="checkbox" hidden checked={isCartOpen} />
-      <aside
-        className={`bg-gray-900 p-2 right-0 top-20 w-72 md:w-96 max-h-[70vh] overflow-auto overflow-y-scroll rounded-xl ${
-          isCartOpen ? "fixed" : "hidden"
-        }`}
-      >
-        <button className="fixed right-5 text-white" onClick={toggleCart}>
-          X
-        </button>
-        <button className="p-2 md:p-3" onClick={clearCart}>
-          <ClearCartIcon />
-        </button>
+      {!(user?.userType === "Admin" || user?.userType === "SuperAdmin") && (
+        <>
+          <label
+            className="cursor-pointer mr-7"
+            htmlFor={cartCheckboxId}
+            onClick={toggleCart}
+          >
+            <CartIcon />
+          </label>
+          <input
+            id={cartCheckboxId}
+            type="checkbox"
+            hidden
+            checked={isCartOpen}
+          />
+          <aside
+            className={`bg-gray-900 p-2 right-0 top-20 w-72 md:w-96 max-h-[70vh] overflow-auto overflow-y-scroll rounded-xl ${
+              isCartOpen ? "fixed" : "hidden"
+            }`}
+          >
+            <button className="fixed right-5 text-white" onClick={toggleCart}>
+              X
+            </button>
+            <button className="p-2 md:p-3" onClick={clearCart}>
+              <ClearCartIcon />
+            </button>
 
-        <ul>
-          {cart.map((product) => (
-            <CartItem
-              key={product.id}
-              {...product}
-              addToCart={() => addToCart(product)}
-              removeFromCart={() => removeFromCart(product)}
-            />
-          ))}
-        </ul>
-        {user && cart.length > 0 && (
-          <>
-            <div className="flex flex-col space-around">
-              <label
-                htmlFor="paymentMethod"
-                className="text-white mt-5 mb-5 block"
-              >
-                Ingrese su medio de pago:
-              </label>
-              <select
-                className="bg-gray-800 text-white p-2 rounded-md mb-5"
-                id="paymentMethod"
-                name="paymentMethod"
-                onChange={handlePaymentMethodChange}
-              >
-                <option value="1">Tarjeta de Débito</option>
-                <option value="2">Tarjeta de Crédito</option>
-                <option value="3">Billetera Virtual</option>
-              </select>
-              <button
-                className="bg-blue-500 text-white p-2 rounded-md "
-                onClick={handleSaleOrderCreate}
-              >
-                Comprar
-              </button>
-            </div>
-          </>
-        )}
-        {user && cart.length === 0 && (
-          <p className="text-white">
-            Recuerde que para comprar productos debe estar logueado y debe haber
-            por lo menos un objeto en el carrito
-          </p>
-        )}
-      </aside>
+            <ul>
+              {cart.map((product) => (
+                <CartItem
+                  key={product.id}
+                  {...product}
+                  addToCart={() => addToCart(product)}
+                  removeFromCart={() => removeFromCart(product)}
+                />
+              ))}
+            </ul>
+            {user && cart.length > 0 && (
+              <>
+                <div className="flex flex-col space-around">
+                  <label
+                    htmlFor="paymentMethod"
+                    className="text-white mt-5 mb-5 block"
+                  >
+                    Ingrese su medio de pago:
+                  </label>
+                  <select
+                    className="bg-gray-800 text-white p-2 rounded-md mb-5"
+                    id="paymentMethod"
+                    name="paymentMethod"
+                    onChange={handlePaymentMethodChange}
+                  >
+                    <option value="1">Tarjeta de Débito</option>
+                    <option value="2">Tarjeta de Crédito</option>
+                    <option value="3">Billetera Virtual</option>
+                  </select>
+                  <button
+                    className="bg-blue-500 text-white p-2 rounded-md "
+                    onClick={handleSaleOrderCreate}
+                  >
+                    Comprar
+                  </button>
+                </div>
+              </>
+            )}
+            {user && cart.length === 0 && (
+              <p className="text-white">
+                Recuerde que para comprar productos debe estar logueado y debe
+                haber por lo menos un objeto en el carrito
+              </p>
+            )}
+          </aside>
+        </>
+      )}
     </>
   );
 };

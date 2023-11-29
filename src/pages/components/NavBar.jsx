@@ -50,7 +50,7 @@ export const NavBar = ({ updateUser, user, userLogged }) => {
           {user ? (
             <a onClick={() => handleLinkClick("myaccount")}>Mi cuenta</a>
           ) : null}
-                    {user?.userType == "Client" ? (
+          {user?.userType == "Client" ? (
             <a onClick={() => handleLinkClick("my-orders")}>Mis pedidos</a>
           ) : null}
           <a onClick={() => handleLinkClick("about")}>Sobre nosotros</a>
@@ -78,7 +78,7 @@ const NavContainer = styled.nav`
     }
   }
   padding: 1.5rem;
-  background-color: transparent;
+  background-color: #150137;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -87,7 +87,9 @@ const NavContainer = styled.nav`
     text-decoration: none;
     margin-top: 1rem;
     margin-right: 1rem;
-    border: 2px solid gray;
+    border: 1px solid white;
+    background: #150137;
+    border-radius: 5px;
     cursor: pointer;
   }
   .links {

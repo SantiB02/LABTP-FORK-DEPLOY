@@ -1,8 +1,18 @@
 import React from "react";
+import Swal from "sweetalert2";
+
+const handleSubmit = (e) => {
+  e.preventDefault();
+  Swal.fire({
+    icon: "success",
+    title: "Mensaje enviado",
+    text: "Te responderemos a la brevedad",
+  });
+};
 
 export const Contact = () => {
   return (
-    <div className="h-[75vh]">
+    <div className="h-[75vh] flex flex-col items-center">
       <h2 className="text-3xl font-bold mb-4">Contacto</h2>
       <p className="mb-4">
         Puedes contactarnos a través de nuestro correo electrónico:
@@ -16,13 +26,16 @@ export const Contact = () => {
       <p className="mb-4">
         También puedes dejarnos un mensaje y te contestaremos a la brevedad.
       </p>
-      <form className="flex flex-col gap-4">
+      <form
+        className="flex flex-col min-w-[50vw] justify-center gap-4"
+        onSubmit={handleSubmit}
+      >
         <label className="flex flex-col">
           <span className="mb-1">Nombre:</span>
           <input
             type="text"
             name="name"
-            className="border border-gray-300 p-2"
+            className="border border-gray-300 p-2 text-black"
           />
         </label>
         <label className="flex flex-col">
@@ -30,7 +43,7 @@ export const Contact = () => {
           <input
             type="text"
             name="email"
-            className="border border-gray-300 p-2"
+            className="border border-gray-300 p-2 text-black"
           />
         </label>
         <label className="flex flex-col">
@@ -38,7 +51,7 @@ export const Contact = () => {
           <textarea
             name="message"
             rows="4"
-            className="border border-gray-300 p-2"
+            className="border border-gray-300 p-2 text-black"
           />
         </label>
         <button

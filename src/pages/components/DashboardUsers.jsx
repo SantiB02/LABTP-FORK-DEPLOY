@@ -3,7 +3,7 @@ import { AdminActions } from "./AdminActions";
 
 const DashboardUsers = () => {
   return (
-    <div>
+    <div className="">
       <AdminActions />
     </div>
   );

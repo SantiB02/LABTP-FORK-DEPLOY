@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { useSaleOrders } from "../../hooks/useSaleOrders";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 export const DashboardSaleOrders = ({ allSaleOrders }) => {
+  const [saleOrders, setSaleOrders] = useState(allSaleOrders); //saleOrders es un array de objetos, cada objeto es una orden de venta. Cada orden de venta tiene un array de objetos que son las líneas de venta [
   const [orderDetailsVisibility, setOrderDetailsVisibility] = useState([]);
 
   const { completeSaleOrder, deleteSaleOrder } = useSaleOrders();
@@ -68,22 +70,58 @@ export const DashboardSaleOrders = ({ allSaleOrders }) => {
 
   const markOrderAsCompleted = (orderId) => {
     completeSaleOrder(orderId);
-    navigate("/dashboard");
   };
 
-  const saleOrderDelete = (orderId) => {
-    deleteSaleOrder(orderId);
-    navigate("/dashboard");
+  const saleOrderDelete = async (orderId) => {
+    const result = await Swal.fire({
+      title: "Confirmar eliminación",
+      text: "¿Está seguro de que desea eliminar esta orden de venta?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Sí, eliminar",
+      cancelButtonText: "Cancelar",
+    });
+
+    if (result.isConfirmed) {
+      try {
+        // Lógica para eliminar la orden de venta (debe implementarse)
+        await deleteSaleOrder(orderId);
+
+        // Actualizar el estado con las órdenes de venta después de la eliminación
+        setSaleOrders((prevOrders) =>
+          prevOrders.filter((order) => order.id !== orderId)
+        );
+
+        // Mostrar un mensaje de éxito
+        Swal.fire({
+          title: "Eliminado",
+          text: "La orden de venta ha sido eliminada con éxito.",
+          icon: "success",
+        });
+      } catch (error) {
+        // En caso de error al eliminar, mostrar un mensaje de error
+        Swal.fire({
+          title: "Error",
+          text: "Hubo un error al intentar eliminar la orden de venta.",
+          icon: "error",
+        });
+      }
+    }
   };
 
   return (
     <div>
-      <h2>Órdenes de venta de clientes</h2>
-      {allSaleOrders.length > 0 ? (
+      <h2 className="text-2xl font-bold mb-4">Órdenes de venta de clientes</h2>
+      {saleOrders.length > 0 ? (
         <ul>
-          {allSaleOrders.map((order) => {
+          {saleOrders.map((order) => {
             return (
-              <li key={order.id} className="my-5 bg-teal-900 p-2">
+              <li
+                key={order.id}
+                className="my-5 bg-[#151130] rounded-xl p-2 border-red-500"
+              >
                 <p>Código: {order.orderCode}</p>
                 <p>Método de pago: {mapPaymentMethod(order)}</p>
                 <p>Fecha: {mapOrderDate(order)}</p>

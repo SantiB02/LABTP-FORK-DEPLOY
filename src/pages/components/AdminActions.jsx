@@ -52,7 +52,7 @@ export const AdminActions = () => {
 
   return (
     <>
-      <section className="my-4">
+      <section className="mt-[10px]">
         <button
           onClick={handleAdminModal}
           className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
@@ -131,7 +131,7 @@ export const AdminActions = () => {
                 {clients
                   ? clients.map((client) => (
                       <div key={client.id} className="my-4">
-                        <ul className="border p-2">
+                        <ul className="border p-2 bg-[#151130] rounded-xl min-w-[50vw] justify-center flex flex-col items-center mb-5">
                           <li>Nombre de usuario: {client.userName} </li>
                           <li>Nombre: {client.name} </li>
                           <li>Apellido: {client.lastName} </li>

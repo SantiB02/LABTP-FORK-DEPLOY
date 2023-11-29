@@ -76,9 +76,9 @@ export const MyOrders = ({ user }) => {
     return <Navigate to="/" replace />;
   } else {
     return (
-      <div>
-        <h1>Tus pedidos</h1>
-        {JSON.parse(localStorage.getItem("userSaleOrders")).length > 0 ? (
+      <div className="ml-5 min-h-[85vh] h-[100%]">
+        <h1 className="text-3xl font-bold mb-4">Tus pedidos</h1>
+        {JSON.parse(localStorage.getItem("userSaleOrders"))?.length > 0 ? (
           <ul>
             {JSON.parse(localStorage.getItem("userSaleOrders")).map((order) => {
               return (

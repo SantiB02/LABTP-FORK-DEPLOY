@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 import { useUser } from "../../hooks/useUser";
 
 export const AccountMenu = ({ user }) => {
+  const [updatedUser, setUpdatedUser] = useState(user);
   const [loading, setLoading] = useState(false);
   const { getUserInfo } = useLogin();
   const { deleteUserAccount } = useUser();
@@ -29,15 +30,22 @@ export const AccountMenu = ({ user }) => {
     deleteUserAccount();
   };
 
-  console.log(user);
+  const handleUpdatedUser = (updatedUser) => {
+    console.log("Nuevos datos de uploaded user", updatedUser);
+    setUpdatedUser(updatedUser);
+  };
+
+  useEffect(() => {
+    setUpdatedUser(updatedUser);
+  }, [updatedUser]);
 
   if (!user) {
     return <Navigate to="/" replace />;
   } else {
     return (
-      <div className="h-[75vh] p-4 flex justify-center items-center flex-col w-90">
+      <div className="h-[100%] p-4 flex justify-center items-center flex-col w-90 min-h-[85vh]">
         <h1 className="text-3xl font-bold mb-4">
-          ¡Bienvenido {user.name} {user.lastName}!
+          ¡Bienvenido {updatedUser.name} {updatedUser.lastName}!
         </h1>
         <p className="text-white">Su correo es: {user.email}</p>
         <p className="text-white">
@@ -50,10 +58,10 @@ export const AccountMenu = ({ user }) => {
             <h2 className="text-xl font-semibold mb-2"></h2>
           </div>
         </div>
-        <UpdateAccount user={user} />
+        <UpdateAccount user={user} handleUpdatedUser={handleUpdatedUser} />
         <button
           onClick={() => handleDeletePopUp()}
-          className="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600 mt-4 w-[20vh] h-[20vh]"
+          className="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600 mt-4 w-[10vh] h-[auto]"
         >
           Quiero borrar mi cuenta
         </button>

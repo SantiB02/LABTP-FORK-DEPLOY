@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { useUser } from "../../hooks/useUser";
+import { useLogin } from "../../hooks/useLogin";
 const { useNavigate } = require("react-router-dom");
 
-export const UpdateAccount = ({ user }) => {
+export const UpdateAccount = ({ user, handleUpdatedUser }) => {
   const [updatedUser, setUpdatedUser] = useState({
     username: user.username,
     name: user.name,
@@ -12,6 +13,8 @@ export const UpdateAccount = ({ user }) => {
   });
 
   const navigate = useNavigate();
+
+  const { login, logout } = useLogin();
 
   const { updateUser } = useUser();
 
@@ -26,7 +29,9 @@ export const UpdateAccount = ({ user }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     updateUser(updatedUser);
-    navigate("/");
+    handleUpdatedUser(updatedUser);
+
+    // navigate("/");
   };
 
   return (

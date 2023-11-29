@@ -37,6 +37,10 @@ export const Login = ({ newLogin }) => {
     window.location.reload();
   };
 
+  const handleCancelPopUp = () => {
+    setIsPopUpActive(false);
+  };
+
   return (
     <>
       <div className="bg-transparent m-2">
@@ -54,7 +58,15 @@ export const Login = ({ newLogin }) => {
       {isPopUpActive ? (
         <ModalWrapper>
           <div className="h-[35%] flex flex-col items-center justify-around bg-[#121212] p-5 w-[30%] rounded-xl">
+            <button
+              className="text-[30px] right-[36%] top-[33%] absolute"
+              onClick={handleCancelPopUp}
+            >
+              X
+            </button>
+
             <h2 className="text-[25px]">Iniciar Sesión</h2>
+
             <form className="flex flex-col" onSubmit={handleSubmit}>
               <div className="flex justify-around mb-5">
                 <label htmlFor="email">Email:</label>
