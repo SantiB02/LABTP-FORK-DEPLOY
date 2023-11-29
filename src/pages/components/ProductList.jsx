@@ -79,9 +79,9 @@ export const ProductList = ({ products }) => {
                       <img
                         src={product.imageLink}
                         alt={product.name}
-                        className="w-16 h-16 object-contain"
+                        className="w-16 h-16 object-contain rounded-xl"
                       />
-                      <h3 className="text-white text-[20px] font-bold text-center">
+                      <h3 className="text-white text-[18px] my-2 text-center">
                         {product.name}
                       </h3>
                       <select
@@ -119,11 +119,11 @@ export const ProductList = ({ products }) => {
                         }}
                       >
                         {isProductInCart ? (
-                          <div className="text-black text-center ml-3">
+                          <div className="text-black text-center ml-1">
                             <RemoveFromCartIcon />{" "}
                           </div>
                         ) : (
-                          <div className="text-black text-center ml-3">
+                          <div className="text-black text-center ml-1">
                             <AddToCartIcon />
                           </div>
                         )}

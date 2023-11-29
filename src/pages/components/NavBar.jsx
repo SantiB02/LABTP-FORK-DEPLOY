@@ -38,7 +38,11 @@ export const NavBar = ({ updateUser, user, userLogged }) => {
   return (
     <>
       <NavContainer showShadow={showShadow} clicked={clicked}>
-        <h2 style={{ cursor: "pointer" }} onClick={() => handleLinkClick("")}>
+        <h2
+          style={{ cursor: "pointer" }}
+          className="text-3xl"
+          onClick={() => handleLinkClick("")}
+        >
           Lorem <span>Lingerie</span>
         </h2>
         <div className={`links ${clicked ? "active" : ""}`}>

@@ -43,7 +43,7 @@ export const AccountMenu = ({ user }) => {
     return <Navigate to="/" replace />;
   } else {
     return (
-      <div className="h-[100%] p-4 flex justify-center items-center flex-col w-90 min-h-[85vh]">
+      <div className="h-[100%] p-4 flex justify-center items-center flex-col w-90 min-h-[95vh]">
         <h1 className="text-3xl font-bold mb-4">
           ¡Bienvenido {updatedUser.name} {updatedUser.lastName}!
         </h1>
@@ -61,7 +61,7 @@ export const AccountMenu = ({ user }) => {
         <UpdateAccount user={user} handleUpdatedUser={handleUpdatedUser} />
         <button
           onClick={() => handleDeletePopUp()}
-          className="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600 mt-4 w-[10vh] h-[auto]"
+          className="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600 mt-4 w-[20vh] h-[auto]"
         >
           Quiero borrar mi cuenta
         </button>

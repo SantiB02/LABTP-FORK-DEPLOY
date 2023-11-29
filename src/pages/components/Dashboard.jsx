@@ -44,7 +44,7 @@ const Dashboard = ({ products, user }) => {
   }
   return (
     <>
-      <div className="flex ml-7 flex-row justify-start align-center h-[100%] min-h-[80vh]	mb-[50px] ">
+      <div className="flex pl-8 bg-blue-900 flex-row justify-start align-center h-[100%] min-h-[80vh]	mb-[50px] ">
         <aside className="flex flex-col space-y-4 mr-10">
           <h1 className="text-3xl font-bold mb-4">Dashboard</h1>
 

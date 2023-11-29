@@ -49,11 +49,11 @@ export const DashboardProducts = ({ products }) => {
         handleProducts={handleProductState}
         handleProductList={handleCreateProduct}
       />
-      <div className="flex justify-center mt-8">
+      <div className="flex justify-center mt-8 mb-5">
         <ul className="flex flex-col w-full space-y-4">
           {dashboardProductList.map((product) => (
             <li
-              className="flex items-center justify-between p-4 bg-[#8b6e6e4d]  shadow-md rounded-md"
+              className="flex items-center justify-between p-4 bg-[#151130] shadow-md rounded-md"
               key={product.id}
             >
               <img
@@ -65,7 +65,7 @@ export const DashboardProducts = ({ products }) => {
                 <p>Código: {product.code}</p>
                 <p>{product.name}</p>
                 <p>${product.price}</p>
-                {product.discount > 0 && <p>Descuento: {product.discount}</p>}
+                {product.discount > 0 && <p>Descuento: {product.discount}%</p>}
               </div>
               <div className="flex space-x-4">
                 <button
